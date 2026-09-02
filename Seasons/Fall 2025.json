@@ -1,0 +1,412 @@
+{
+    "matchDates": [
+        {
+            "date": "2025-10-01T22:30:00.000Z",
+            "location": "Mark and Kathy's - 239 High Range Rd. Londonderry, NH"
+        },
+        {
+            "date": "2025-10-08T22:30:00.000Z",
+            "location": "Eliott and Sherry's - 40 High Range Rd. Londonderry, NH"
+        },
+        {
+            "date": "2025-10-15T22:30:00.000Z",
+            "location": "Alyssa and Kenny's - 3 Theodore Ave. Salem, NH"
+        },
+        {
+            "date": "2025-10-29T22:30:00.000Z",
+            "location": "Erica and Pablo's - 33 Exeter Ave. Manchester, NH"
+        },
+        {
+            "date": "2025-11-05T23:30:00.000Z",
+            "location": "Dan and Laurie's - 14 West Dr. Bedford, NH"
+        },
+        {
+            "date": "2025-11-12T23:30:00.000Z",
+            "location": "Mark and Kathy's - 239 High Range Rd. Londonderry, NH"
+        }
+    ],
+
+    "teams": [
+        {
+            "id": 1,
+            "name": "The Great Cornholios",
+            "acronym": "GCH",
+            "color": "#F49736",
+            "players": [
+                "Eliott",
+                "Sherry",
+                "Shawn",
+                "Jaidah"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Purple Baggins",
+            "acronym": "PBG",
+            "color": "#A637CD",
+            "players": [
+                "Mark",
+                "Kathy",
+                "Alyssa",
+                "Kenny"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Cornadoes",
+            "acronym": "CND",
+            "color": "#67CF3E",
+            "players": [
+                "Dan",
+                "Laurie",
+                "Erica",
+                "Pablo"
+            ]
+        }
+    ],
+
+    "matches": [
+        {
+            "id": 1,
+            "team1ID": 1,
+            "team2ID": 2,
+            "week": 1,
+            "games": [
+                {
+                    "team1Score": 21,
+                    "team2Score": 20
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 19
+                },
+                {
+                    "team1Score": 5,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 12,
+                    "team2Score": 21
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "team1ID": 1,
+            "team2ID": 3,
+            "week": 1,
+            "games": [
+                {
+                    "team1Score": 7,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 6
+                },
+                {
+                    "team1Score": 9,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 10,
+                    "team2Score": 21
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "team1ID": 2,
+            "team2ID": 3,
+            "week": 2,
+            "games": [
+                {
+                    "team1Score": 20,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 0
+                },
+                {
+                    "team1Score": 14,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 6
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "team1ID": 2,
+            "team2ID": 1,
+            "week": 2,
+            "games": [
+                {
+                    "team1Score": 6,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 7,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 0,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 20
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "team1ID": 3,
+            "team2ID": 1,
+            "week": 3,
+            "games": [
+                {
+                    "team1Score": 5,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 2,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 16,
+                    "team2Score": 21
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "team1ID": 3,
+            "team2ID": 2,
+            "week": 3,
+            "games": [
+                {
+                    "team1Score": 20,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 4,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 12,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 9,
+                    "team2Score": 21
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "team1ID": 1,
+            "team2ID": 2,
+            "week": 4,
+            "games": [
+                {
+                    "team1Score": 21,
+                    "team2Score": 10
+                },
+                {
+                    "team1Score": 1,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 18,
+                    "team2Score": 21
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "team1ID": 1,
+            "team2ID": 3,
+            "week": 4,
+            "games": [
+                {
+                    "team1Score": 16,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 8
+                },
+                {
+                    "team1Score": 9,
+                    "team2Score": 21
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "team1ID": 2,
+            "team2ID": 3,
+            "week": 5,
+            "games": [
+                {
+                    "team1Score": 0,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 2
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 20
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 19
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "team1ID": 2,
+            "team2ID": 1,
+            "week": 5,
+            "games": [
+                {
+                    "team1Score": 9,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 2,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 3,
+                    "team2Score": 21
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "team1ID": 3,
+            "team2ID": 1,
+            "week": 6,
+            "games": [
+                {
+                    "team1Score": 15,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 15,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 3,
+                    "team2Score": 21
+                }
+            ]
+        },
+        {
+            "id": 12,
+            "team1ID": 3,
+            "team2ID": 2,
+            "week": 6,
+            "games": [
+                {
+                    "team1Score": 21,
+                    "team2Score": 11
+                },
+                {
+                    "team1Score": 15,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 14
+                }
+            ]
+        },
+        {
+            "id": 13,
+            "team1ID": false,
+            "team2ID": false,
+            "week": "Playoffs",
+            "games": [
+                {
+                    "team1Score": 21,
+                    "team2Score": 7
+                },
+                {
+                    "team1Score": 18,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 11,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 10
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 3
+                }
+            ]
+        }
+    ],
+
+    "playoffs": [
+        {
+            "rules": "The top 2 ranked teams of the regular season qualify for the championship match. This match will work the same as regular season matches, except that if there is a tie at the end of the allotted time period, one final game is played to determine the winner.",
+            "bracketNames": [
+                null
+            ],
+            "roundNames": [
+                null
+            ],
+            "matchStructure": [
+                {
+                    "matchID": 13,
+                    "bracketIndex": 0,
+                    "roundIndex": 0,
+                    "orderIndex": 0,
+                    "teamSlots": [
+                        {
+                            "sourceType": "rankings",
+                            "rank": 1
+                        },
+                        {
+                            "sourceType": "rankings",
+                            "rank": 2
+                        }
+                    ]
+                }
+            ],
+            "podiumSlots": [
+                {
+                    "sourceType": "match",
+                    "matchID": 13,
+                    "result": "winner"
+                },
+                {
+                    "sourceType": "match",
+                    "matchID": 13,
+                    "result": "loser"
+                },
+                {
+                    "sourceType": "rankings",
+                    "rank": 3
+                }
+            ]
+        }
+    ],
+
+    "tiebreakers": [
+        
+    ]
+}

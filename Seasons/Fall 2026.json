@@ -1,0 +1,343 @@
+{
+    "matchDates": [
+        {
+            "date": "2026-09-02T23:00:00.000Z",
+            "location": "Mark and Kathy's - 239 High Range Rd. Londonderry, NH"
+        },
+        {
+            "date": "2026-09-09T23:00:00.000Z",
+            "location": "Location TBD"
+        },
+        {
+            "date": "2026-09-16T23:00:00.000Z",
+            "location": "Location TBD"
+        },
+        {
+            "date": "2026-09-23T23:00:00.000Z",
+            "location": "Location TBD"
+        },
+        {
+            "date": "2026-09-30T23:00:00.000Z",
+            "location": "Location TBD"
+        },
+        {
+            "date": "2026-10-07T23:00:00.000Z",
+            "location": "Location TBD"
+        },
+        {
+            "date": "2026-10-14T23:00:00.000Z",
+            "location": "Location TBD"
+        },
+        {
+            "date": "2026-10-21T23:00:00.000Z",
+            "location": "Location TBD"
+        },
+        {
+            "date": "2026-10-28T23:00:00.000Z",
+            "location": "Location TBD"
+        }
+    ],
+
+    "teams": [
+        {
+            "id": 1,
+            "name": "Cornhole Warriors",
+            "acronym": "WAR",
+            "color": "#A637CD",
+            "players": [
+                "Mark",
+                "Kathy",
+                "Shawn",
+                "Jaidah",
+                "Markie"
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Corn to be Wild",
+            "acronym": "WLD",
+            "color": "#67CF3E",
+            "players": [
+                "Dan",
+                "Laurie",
+                "Jordan",
+                "Jayden"
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Blame it on the Baggie",
+            "acronym": "BAG",
+            "color": "#F43686",
+            "players": [
+                "Jason",
+                "Onya",
+                "Mike",
+                "Melissa",
+                "James"
+            ]
+        },
+        {
+            "id": 4,
+            "name": "Shut Your Cornhole",
+            "acronym": "SYC",
+            "color": "#F49736",
+            "players": [
+                "Eliott",
+                "Sherry",
+                "Pablo",
+                "Erica"
+            ]
+        }
+    ],
+
+    "matches": [
+        {
+            "id": 1,
+            "team1ID": 1,
+            "team2ID": 2,
+            "week": 1,
+            "games": [
+
+            ]
+        },
+        {
+            "id": 2,
+            "team1ID": 3,
+            "team2ID": 4,
+            "week": 1,
+            "games": [
+                
+            ]
+        },
+        {
+            "id": 3,
+            "team1ID": 1,
+            "team2ID": 3,
+            "week": 2,
+            "games": [
+                
+            ]
+        },
+        {
+            "id": 4,
+            "team1ID": 2,
+            "team2ID": 4,
+            "week": 2,
+            "games": [
+                
+            ]
+        },
+        {
+            "id": 5,
+            "team1ID": 1,
+            "team2ID": 4,
+            "week": 3,
+            "games": [
+                
+            ]
+        },
+        {
+            "id": 6,
+            "team1ID": 2,
+            "team2ID": 3,
+            "week": 3,
+            "games": [
+                
+            ]
+        },
+       {
+            "id": 7,
+            "team1ID": 1,
+            "team2ID": 2,
+            "week": 4,
+            "games": [
+
+            ]
+        },
+        {
+            "id": 8,
+            "team1ID": 3,
+            "team2ID": 4,
+            "week": 4,
+            "games": [
+                
+            ]
+        },
+        {
+            "id": 9,
+            "team1ID": 1,
+            "team2ID": 3,
+            "week": 5,
+            "games": [
+                
+            ]
+        },
+        {
+            "id": 10,
+            "team1ID": 2,
+            "team2ID": 4,
+            "week": 5,
+            "games": [
+                
+            ]
+        },
+        {
+            "id": 11,
+            "team1ID": 1,
+            "team2ID": 4,
+            "week": 6,
+            "games": [
+                
+            ]
+        },
+        {
+            "id": 12,
+            "team1ID": 2,
+            "team2ID": 3,
+            "week": 6,
+            "games": [
+                
+            ]
+        },
+        {
+            "id": 13,
+            "team1ID": 1,
+            "team2ID": 2,
+            "week": 7,
+            "games": [
+
+            ]
+        },
+        {
+            "id": 14,
+            "team1ID": 3,
+            "team2ID": 4,
+            "week": 7,
+            "games": [
+                
+            ]
+        },
+        {
+            "id": 15,
+            "team1ID": 1,
+            "team2ID": 3,
+            "week": 8,
+            "games": [
+                
+            ]
+        },
+        {
+            "id": 16,
+            "team1ID": 2,
+            "team2ID": 4,
+            "week": 8,
+            "games": [
+                
+            ]
+        },
+        {
+            "id": 17,
+            "team1ID": 1,
+            "team2ID": 4,
+            "week": 9,
+            "games": [
+                
+            ]
+        },
+        {
+            "id": 18,
+            "team1ID": 2,
+            "team2ID": 3,
+            "week": 9,
+            "games": [
+                
+            ]
+        },
+        {
+            "id": 19,
+            "week": "Playoffs",
+            "games": [
+                
+            ]
+        },
+        {
+            "id": 20,
+            "week": "Playoffs",
+            "games": [
+                
+            ]
+        }
+    ],
+
+    "playoffs": {
+        "rules": "The top 2 ranked teams of the regular season qualify for the championship match, while the bottom 2 ranked teams play a 3rd-place match. Playoff matches work the same as regular season matches, except that if there is a tie at the end of the allotted time period, one final game is played to determine the winner.",
+        "bracketNames": [
+            "Championship Match",
+            "3rd-Place Match"
+        ],
+        "roundNames": [
+            null
+        ],
+        "matchStructure": [
+            {
+                "matchID": 19,
+                "bracketIndex": 0,
+                "roundIndex": 0,
+                "orderIndex": 0,
+                "teamSlots": [
+                    {
+                        "sourceType": "rankings",
+                        "rank": 1
+                    },
+                    {
+                        "sourceType": "rankings",
+                        "rank": 2
+                    }
+                ]
+            },
+            {
+                "matchID": 20,
+                "bracketIndex": 1,
+                "roundIndex": 0,
+                "orderIndex": 0,
+                "teamSlots": [
+                    {
+                        "sourceType": "rankings",
+                        "rank": 3
+                    },
+                    {
+                        "sourceType": "rankings",
+                        "rank": 4
+                    }
+                ]
+            }
+        ],
+        "podiumSlots": [
+            {
+                "sourceType": "match",
+                "matchID": 19,
+                "result": "winner"
+            },
+            {
+                "sourceType": "match",
+                "matchID": 19,
+                "result": "loser"
+            },
+            {
+                "sourceType": "match",
+                "matchID": 20,
+                "result": "winner"
+            },
+            {
+                "sourceType": "match",
+                "matchID": 20,
+                "result": "loser"
+            }
+        ]
+    },
+
+    "tiebreakers": [
+        
+    ]
+}

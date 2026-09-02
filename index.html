@@ -1,17 +1,35 @@
 <!DOCTYPE html>
-<html>
-<head>
-<style>
-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-</style>
-</head>
-<body>
 
-<img src="hellopoors.png" alt="Erica Muhl" style="width:1000px;height:750px;">
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-</body>
+        <title id="title">Title</title>
+
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+        <header>
+            <h1 id="header">Header</h1>
+        </header>
+
+        <div id="season-selector">
+            <label for="season-select">Season</label>
+            <select id="season-select"></select>
+        </div>
+
+        <nav id="nav-buttons"></nav>
+
+        <main id="content">
+            <p>Loading league information...</p>
+        </main>
+
+        <script src="Game.js"></script>
+        <script src="Match.js"></script>
+        <script src="Team.js"></script>
+        <script src="League.js"></script>
+        <script src="main.js"></script>
+    </body>
 </html>
