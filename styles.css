@@ -77,6 +77,12 @@ h1, h2, h3, h4, h5, h6 {
     font-family: var(--h1-h6-font-family);
 }
 
+button,
+select {
+    color: var(--main-text-color);
+    font-family: inherit;
+}
+
 table {
     background-color: var(--secondary-color);
     width: 100%;
