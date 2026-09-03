@@ -52,6 +52,8 @@
 
 html {
     min-width: max-content;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 * {
@@ -71,6 +73,14 @@ main {
     margin: 0 auto;
     padding: var(--main-vertical-padding) var(--main-horizontal-padding);
     max-width: var(--max-content-width);
+}
+
+button,
+select,
+input,
+textarea {
+    font: inherit;
+    color: inherit;
 }
 
 h1, h2, h3, h4, h5, h6 {
