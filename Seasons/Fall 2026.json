@@ -6,31 +6,31 @@
         },
         {
             "date": "2026-09-09T23:00:00.000Z",
-            "location": "Location TBD"
+            "location": "Dan and Laurie's - 14 West Dr. Bedford, NH"
         },
         {
             "date": "2026-09-16T23:00:00.000Z",
-            "location": "Location TBD"
+            "location": "Eliott and Sherry's - 40 High Range Rd. Londonderry, NH"
         },
         {
             "date": "2026-09-23T23:00:00.000Z",
-            "location": "Location TBD"
+            "location": "Erica and Pablo's - 33 Exeter Ave. Manchester, NH"
         },
         {
             "date": "2026-09-30T23:00:00.000Z",
-            "location": "Location TBD"
+            "location": "Mark and Kathy's - 239 High Range Rd. Londonderry, NH"
         },
         {
             "date": "2026-10-07T23:00:00.000Z",
-            "location": "Location TBD"
+            "location": "Dan and Laurie's - 14 West Dr. Bedford, NH"
         },
         {
             "date": "2026-10-14T23:00:00.000Z",
-            "location": "Location TBD"
+            "location": "Eliott and Sherry's - 40 High Range Rd. Londonderry, NH"
         },
         {
             "date": "2026-10-21T23:00:00.000Z",
-            "location": "Location TBD"
+            "location": "Erica and Pablo's - 33 Exeter Ave. Manchester, NH"
         },
         {
             "date": "2026-10-28T23:00:00.000Z",
@@ -98,7 +98,22 @@
             "team2ID": 2,
             "week": 1,
             "games": [
-
+                {
+                    "team1Score": 3,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 12
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 11
+                },
+                {
+                    "team1Score": 5,
+                    "team2Score": 21
+                }
             ]
         },
         {
@@ -107,7 +122,18 @@
             "team2ID": 4,
             "week": 1,
             "games": [
-                
+                {
+                    "team1Score": 7,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 17,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 18,
+                    "team2Score": 21
+                }
             ]
         },
         {
