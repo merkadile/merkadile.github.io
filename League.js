@@ -1,6 +1,7 @@
 class League {
     constructor(data) {
         this.matchDates = data.matchDates;
+        this.mainRules = data.mainRules;
 
         this.teams = [];
         this.matches = [];
@@ -25,15 +26,14 @@ class League {
             team.calculateStatistics(this)
         }
 
-        /*
         for (const matchStructureData of data.playoffs.matchStructure) {
             this.playoffStructureMap.set(matchStructureData.matchID, matchStructureData);
         }
-        */
 
         this.teams = this.rankTeams(this.teams, true);
 
         this.playoffs = data.playoffs;
+        this.tiebreakers = data.tiebreakers;
     }
 
     rankTeams(teamsToRank) {

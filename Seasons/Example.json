@@ -10,8 +10,12 @@
         },
         {
             "date": "2026-08-15T13:00:00.000Z",
-            "location": "Mount Everest"
+            "location": "Sand Court"
         }
+    ],
+
+    "mainRules": [
+        "Have fun!"
     ],
 
     "teams": [
@@ -170,7 +174,9 @@
     ],
 
     "playoffs": {
-        "rules": "Have fun!",
+        "rules": [
+            "Have fun!"
+        ],
         "bracketNames": [
             "Championship Bracket",
             "3rd-Place Match"
@@ -178,6 +184,16 @@
         "roundNames": [
             "Semifinals",
             "Finals"
+        ],
+        "matchDates": [
+            {
+                "date": "2026-08-22T13:00:00.000Z",
+                "location": "The Stadium"
+            },
+            {
+                "date": "2026-08-30T03:59:00.000Z",
+                "location": "Mount Everest"
+            }
         ],
         "matchStructure": [
             {

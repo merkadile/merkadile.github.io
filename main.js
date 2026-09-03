@@ -414,12 +414,12 @@ async function main() {
 main();
 
 //  remaining things to do:
-//      1. add uncle e rules to site (standings page me thinks)
-//      2. fix matchstructure iterable stuff in League.js
-//      3. finalize rankings logic
+//      a. finish writing 2025 rules and main rules to standings page
+//      b. fix matchstructure iterable stuff in League.js? it might be fixed already but just in case
+//      1. finalize rankings logic
 //          each element of tiebreaker follows this format:
 //              {
 //                  "tiedRankingOrderIDs": [1, 2, 0]
 //              }
-//      4. playoff page implementation (podium, bracket visuals, and playoff chances)
-//      5. team and match pages (make sure to handle playoff matches appropriately)
+//      2. playoff page implementation (podium, bracket visuals, and playoff chances)
+//      3. team and match pages (make sure to handle playoff matches appropriately)

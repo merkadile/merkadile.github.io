@@ -1,29 +1,33 @@
 {
     "matchDates": [
         {
-            "date": "2025-10-01T22:30:00.000Z",
+            "date": "2025-10-01T23:00:00.000Z",
             "location": "Mark and Kathy's - 239 High Range Rd. Londonderry, NH"
         },
         {
-            "date": "2025-10-08T22:30:00.000Z",
+            "date": "2025-10-08T23:00:00.000Z",
             "location": "Eliott and Sherry's - 40 High Range Rd. Londonderry, NH"
         },
         {
-            "date": "2025-10-15T22:30:00.000Z",
+            "date": "2025-10-15T23:00:00.000Z",
             "location": "Alyssa and Kenny's - 3 Theodore Ave. Salem, NH"
         },
         {
-            "date": "2025-10-29T22:30:00.000Z",
+            "date": "2025-10-29T23:00:00.000Z",
             "location": "Erica and Pablo's - 33 Exeter Ave. Manchester, NH"
         },
         {
-            "date": "2025-11-05T23:30:00.000Z",
+            "date": "2025-11-06T00:00:00.000Z",
             "location": "Dan and Laurie's - 14 West Dr. Bedford, NH"
         },
         {
-            "date": "2025-11-12T23:30:00.000Z",
+            "date": "2025-11-13T00:00:00.000Z",
             "location": "Mark and Kathy's - 239 High Range Rd. Londonderry, NH"
         }
+    ],
+
+    "mainRules": [
+        
     ],
 
     "teams": [
@@ -360,51 +364,59 @@
         }
     ],
 
-    "playoffs": [
-        {
-            "rules": "The top 2 ranked teams of the regular season qualify for the championship match. This match will work the same as regular season matches, except that if there is a tie at the end of the allotted time period, one final game is played to determine the winner.",
-            "bracketNames": [
-                null
-            ],
-            "roundNames": [
-                null
-            ],
-            "matchStructure": [
-                {
-                    "matchID": 13,
-                    "bracketIndex": 0,
-                    "roundIndex": 0,
-                    "orderIndex": 0,
-                    "teamSlots": [
-                        {
-                            "sourceType": "rankings",
-                            "rank": 1
-                        },
-                        {
-                            "sourceType": "rankings",
-                            "rank": 2
-                        }
-                    ]
-                }
-            ],
-            "podiumSlots": [
-                {
-                    "sourceType": "match",
-                    "matchID": 13,
-                    "result": "winner"
-                },
-                {
-                    "sourceType": "match",
-                    "matchID": 13,
-                    "result": "loser"
-                },
-                {
-                    "sourceType": "rankings",
-                    "rank": 3
-                }
-            ]
-        }
-    ],
+    "playoffs": {
+        "rules": [
+            "The top 2 ranked teams of the regular season qualify for the championship match.",
+            "This match will work the same as regular season matches, except that if there is a tie at the end of the allotted time period, one final game is played to determine the winner.",
+            "Alternates will not be allowed to sub in during playoff matches."
+        ],
+        "bracketNames": [
+            null
+        ],
+        "roundNames": [
+            null
+        ],
+        "matchDates": [
+            {
+                "date": "2025-11-22T17:00:00.000Z",
+                "location": "Eliott and Sherry's - 40 High Range Rd. Londonderry, NH"
+            }
+        ],
+        "matchStructure": [
+            {
+                "matchID": 13,
+                "bracketIndex": 0,
+                "roundIndex": 0,
+                "orderIndex": 0,
+                "teamSlots": [
+                    {
+                        "sourceType": "rankings",
+                        "rank": 1
+                    },
+                    {
+                        "sourceType": "rankings",
+                        "rank": 2
+                    }
+                ]
+            }
+        ],
+        "podiumSlots": [
+            {
+                "sourceType": "match",
+                "matchID": 13,
+                "result": "winner"
+            },
+            {
+                "sourceType": "match",
+                "matchID": 13,
+                "result": "loser"
+            },
+            {
+                "sourceType": "rankings",
+                "rank": 3
+            }
+        ]
+    },
 
     "tiebreakers": [
         

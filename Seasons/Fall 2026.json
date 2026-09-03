@@ -38,6 +38,27 @@
         }
     ],
 
+    "mainRules": [
+        "Each match will last 60 minutes.",
+        [
+            "Teams will complete as many games as possible in that allotted time period.",
+            "The team with the most games won in the time period will be declared the winner of the match.",
+            "If both teams win equal numbers of games, they tie the match."
+        ],
+        "No new game will start after 50 minutes. Games already in progress after 50 minutes will continue until completed, regardless of time remaining.",
+        "Each game in a match shall be played by only two players.",
+        [
+            "No one player shall play in a second game per match until all players present have played in a game.",
+            "Players may not substitute for each other during a game. Only after a game is complete may players trade out."
+        ],
+        "Each team may reach out and acquire an alternate if a regular player is not available to play a match.",
+        [
+            "The alternate must be the same level or lower than the player being replaced.",
+            "Alternates that show up without a request from a team, may not be able to play."
+        ],
+        "Each player pays $5 each week during the regular season. All money should be given to Commissioner Mark."
+    ],
+
     "teams": [
         {
             "id": 1,
@@ -72,9 +93,8 @@
             "players": [
                 "Jason",
                 "Onya",
-                "Mike",
-                "Melissa",
-                "James"
+                "James",
+                "Omar"
             ]
         },
         {
@@ -297,13 +317,24 @@
     ],
 
     "playoffs": {
-        "rules": "The top 2 ranked teams of the regular season qualify for the championship match, while the bottom 2 ranked teams play a 3rd-place match. Playoff matches work the same as regular season matches, except that if there is a tie at the end of the allotted time period, one final game is played to determine the winner.",
+        "rules": [
+            "The top 2 ranked teams of the regular season qualify for the championship match, while the bottom 2 ranked teams play a 3rd-place match.",
+            "Playoff matches work the same as regular season matches, except that if there is a tie at the end of the allotted time period, one final game is played to determine the winner.",
+            "Alternates will be allowed to sub in for playoff matches if approved by commissioners ahead of time.",
+            "The champion team of this season will be awarded $500. The runners up will be awarded the remainder of the pot."
+        ],
         "bracketNames": [
             "Championship Match",
             "3rd-Place Match"
         ],
         "roundNames": [
             null
+        ],
+        "matchDates": [
+            {
+                "date": "2026-11-05T00:00:00.000Z",
+                "location": "Location TBD"
+            }
         ],
         "matchStructure": [
             {
