@@ -40,7 +40,7 @@
     --glossary-p-margin: 0.375rem;
     --result-outside-padding: 0.5rem;
     --result-team-border-thickness: 0.25rem;
-    --result-acronym-width: 2.25rem;
+    --result-acronym-width: 2.5rem;
     --result-game-wins-width: 1.0rem;
     --result-separator-width: 1.25rem;
     --season-selector-gap: 0.625rem;
@@ -210,7 +210,7 @@ select {
 
 .result-team-1 .acronym{
     width: var(--result-acronym-width);
-    text-align: left;
+    text-align: right;
 }
 
 .result-team-1 .game-wins{
@@ -226,7 +226,7 @@ select {
 
 .result-team-2 .acronym{
     width: var(--result-acronym-width);
-    text-align: right;
+    text-align: left;
 }
 
 .result-team-2 .game-wins{
