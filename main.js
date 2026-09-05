@@ -54,6 +54,14 @@ function displayStandings(league, season) {
                 <span class="glossary-abbr">NS:</span> Net Score For/Against (sum of the team's scores in all games minus sum of opponents' scores in all games)
             </p>
         </span>
+        <span class="main-rules">
+            <h3>League Rules:</h4>
+    `;
+
+    html += printArray(league.mainRules);
+
+    html += `
+        </span>
     `;
 
     return html;
@@ -285,6 +293,19 @@ function formatDateTime(date) {
     return `${dateWithSuffix} at ${timeString}`;
 }
 
+function printArray(arr) {
+    let html = `<ul>`;
+
+    for (const elem of arr) {
+        if (Array.isArray(elem)) html += printArray(elem);
+        else html += `<li>${elem}</li>`;
+    }
+
+    html += `</ul>`
+
+    return html;
+}
+
 async function main() {
     const collectiveInfoResponse = await fetch("Collective Info.json");
     const collectiveInfoData = await collectiveInfoResponse.json();
@@ -414,8 +435,7 @@ async function main() {
 main();
 
 //  remaining things to do:
-//      a. finish writing 2025 rules and main rules to standings page
-//      b. fix matchstructure iterable stuff in League.js? it might be fixed already but just in case
+//      a. fix formatting with tiebreaker page
 //      1. finalize rankings logic
 //          each element of tiebreaker follows this format:
 //              {

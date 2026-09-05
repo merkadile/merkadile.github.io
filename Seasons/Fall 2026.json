@@ -46,6 +46,7 @@
             "If both teams win equal numbers of games, they tie the match."
         ],
         "No new game will start after 50 minutes. Games already in progress after 50 minutes will continue until completed, regardless of time remaining.",
+        "A full team is at least 4 players. Teams should try their best to show up with a full team when possible.",
         "Each game in a match shall be played by only two players.",
         [
             "No one player shall play in a second game per match until all players present have played in a game.",

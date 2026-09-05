@@ -36,8 +36,10 @@
     --select-arrow-image-size: 0.75rem;
     --select-arrow-image-buffer: 0.75rem;
     --standings-team-border-thickness: 0.5rem;
-    --glossary-margin: 2.5rem;
-    --glossary-p-margin: 0.375rem;
+    --glossary-outside-margin: 1.25rem;
+    --glossary-inside-margin: 0.375rem;
+    --main-rules-outside-margin: 1.75rem;
+    --main-rules-inside-margin: 0.375rem;
     --result-outside-padding: 0.5rem;
     --result-team-border-thickness: 0.25rem;
     --result-acronym-width: 2.5rem;
@@ -185,23 +187,28 @@ select {
     border-left: var(--standings-team-border-thickness) solid var(--team-color);
 }
 
-.glossary {
-    margin-top: var(--glossary-margin);
-    color: var(--faded-text-color);
-}
-
 .glossary h4 {
-    margin-bottom: 0;
-    color: var(--main-text-color);
+    margin-top: var(--glossary-outside-margin);
+    margin-bottom: var(--glossary-inside-margin);
 }
 
 .glossary p {
-    margin-top: var(--glossary-p-margin);
+    margin-top: 0;
+    color: var(--faded-text-color);
     font-size: var(--small-font-size);
 }
 
 .glossary-abbr {
     font-weight: bold;
+}
+
+.main-rules h3 {
+    margin-top: var(--main-rules-outside-margin);
+    margin-bottom: var(--main-rules-inside-margin);
+}
+
+.main-rules ul {
+    margin-top: 0;
 }
 
 .match-result {

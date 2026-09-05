@@ -27,7 +27,21 @@
     ],
 
     "mainRules": [
-        
+        "Each match will last 60 minutes.",
+        [
+            "Teams will complete as many games as possible in that allotted time period.",
+            "The team with the most games won in the time period will be declared the winner of the match.",
+            "If both teams win equal numbers of games, they tie the match."
+        ],
+        "No new game will start after 50 minutes. Games already in progress after 50 minutes will continue until completed, regardless of time remaining.",
+        "A full team is 4 players. Teams must have enough players show up each week in order to compete.",
+        "Each game in a match shall be played by only two players.",
+        [
+            "No one player shall play in a second game per match until all players present have played in a game.",
+            "Players may not substitute for each other during a game. Only after a game is complete may players trade out."
+        ],
+        "If a team is missing a player, they may acquire an alternate that is present to substitute. If every team is full and more alternates are present, they can play on one of the teams as approved by the commissioners.",
+        "Each player pays $5 each week during the regular season. All money should be given to Commissioner Mark."
     ],
 
     "teams": [
@@ -368,7 +382,8 @@
         "rules": [
             "The top 2 ranked teams of the regular season qualify for the championship match.",
             "This match will work the same as regular season matches, except that if there is a tie at the end of the allotted time period, one final game is played to determine the winner.",
-            "Alternates will not be allowed to sub in during playoff matches."
+            "Alternates will not be allowed to sub in during playoff matches.",
+            "The champion team of this season will be awarded the entire pot of money collected throughout the season."
         ],
         "bracketNames": [
             null
