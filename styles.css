@@ -276,6 +276,15 @@ select {
     font-style: italic;
 }
 
+.tiebreaker-main h4 {
+    margin-bottom: 0.25rem;
+}
+
+.tiebreaker-main ul, .tiebreaker-main ol {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 .tiebreaker-footnote {
     font-size: var(--small-font-size);
     font-style: italic;

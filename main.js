@@ -128,7 +128,7 @@ function displaySchedule(league, season, week) {
             html += `
                 <tr>
                     <td class="left-align"><a href="?season=${season}&page=match&id=${match.id}">
-                        ${team1.name} vs. ${team2.name}
+                        ${team1.name} (${team1.acronym}) vs. ${team2.name} (${team2.acronym})
                     </a></td>
                     <td class="left-align match-result">
             `;
@@ -179,28 +179,30 @@ function displayTiebreaker() {
 
     return `
         <h2>Tiebreaking Procedures</h2>
-        <p>This page outlines the way the website determines rankings and breaks ties for the league.</p>
-        <p>Team rankings are determined in order of highest to lowest number of ranking points (2 points are earned for each match win and 1 point is earned for each match tie).</p>
-        <h4>To Break a Tie Between Two Teams:</h4>
-        <ol>
-            <li>Better Record (Win-Tie-Loss%) on Head-to-Head Matches</li>
-            <li>More Individual Games Won on Head-to-Head Matches</li>
-            <li>Higher Totaled Score on Head-to-Head Matches</li>
-            <li>Better Overall Win-Tie-Loss%</li>
-            <li>Better Overall Net Games Won / Lost</li>
-            <li>Better Overall Net Score For / Against</li>
-        </ol>
-        <ul><li>If it gets to this point, the teams are officially tied in ranking, and will have to flip a coin to determine how to proceed.</li></ul>
-        <h4>To Break a Tie Between Three or More Teams<span class="tiebreaker-footnote">*</span>:</h4>
-        <ol>
-            <li>Best Win-Tie-Loss% in Matches Among the Tied Teams</li>
-            <li>Best Net Games Won / Lost in Matches Among the Tied Teams</li>
-            <li>Best Net Score For / Against in Matches Among the Tied Teams</li>
-            <li>Best Overall Win-Tie-Loss%</li>
-            <li>Best Overall Net Games Won / Lost</li>
-            <li>Best Overall Net Score For / Against</li>
-        </ol>
-        <ul><li>If it gets to this point, the teams are officially tied in ranking, and will have to roll dice to determine how to proceed.</li></ul>
+        <span class="tiebreaker-main">
+            <p>This page outlines the way the website determines rankings and breaks ties for the league.</p>
+            <p>Team rankings are determined in order of highest to lowest number of ranking points (2 points are earned for each match win and 1 point is earned for each match tie).</p>
+            <h4>To Break a Tie Between Two Teams:</h4>
+            <ol>
+                <li>Better Record (Win-Tie-Loss%) on Head-to-Head Matches</li>
+                <li>More Individual Games Won on Head-to-Head Matches</li>
+                <li>Higher Totaled Score on Head-to-Head Matches</li>
+                <li>Better Overall Win-Tie-Loss%</li>
+                <li>Better Overall Net Games Won / Lost</li>
+                <li>Better Overall Net Score For / Against</li>
+            </ol>
+            <ul><li>If it gets to this point, the teams are officially tied in ranking, and will have to flip a coin to determine how to proceed.</li></ul>
+            <h4>To Break a Tie Between Three or More Teams<span class="tiebreaker-footnote">*</span>:</h4>
+            <ol>
+                <li>Best Win-Tie-Loss% in Matches Among the Tied Teams</li>
+                <li>Best Net Games Won / Lost in Matches Among the Tied Teams</li>
+                <li>Best Net Score For / Against in Matches Among the Tied Teams</li>
+                <li>Best Overall Win-Tie-Loss%</li>
+                <li>Best Overall Net Games Won / Lost</li>
+                <li>Best Overall Net Score For / Against</li>
+            </ol>
+            <ul><li>If it gets to this point, the teams are officially tied in ranking, and will have to roll dice to determine how to proceed.</li></ul>
+        </span>
         <p class="tiebreaker-footnote">*If after one of these steps the tie is broken but a smaller tie between two or more teams remains, seed the teams that have broken out of the tie appropriately and start at the beginning of the tie procedures for the remaining teams.</p>
     `;
 }
@@ -435,7 +437,6 @@ async function main() {
 main();
 
 //  remaining things to do:
-//      a. fix formatting with tiebreaker page
 //      1. finalize rankings logic
 //          each element of tiebreaker follows this format:
 //              {
