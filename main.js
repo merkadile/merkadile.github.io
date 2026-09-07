@@ -437,10 +437,5 @@ async function main() {
 main();
 
 //  remaining things to do:
-//      1. finalize rankings logic
-//          each element of tiebreaker follows this format:
-//              {
-//                  "tiedRankingOrderIDs": [1, 2, 0]
-//              }
-//      2. playoff page implementation (podium, bracket visuals, and playoff chances)
-//      3. team and match pages (make sure to handle playoff matches appropriately)
+//      1. playoff page implementation (podium, bracket visuals, and playoff chances)
+//      2. team and match pages (make sure to handle playoff matches appropriately)

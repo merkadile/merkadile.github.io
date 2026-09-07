@@ -40,10 +40,10 @@ class Team {
             }
         }
 
-        this.gamesPlayed = this.wins + this.losses + this.ties;
+        this.matchesPlayed = this.wins + this.losses + this.ties;
         this.rankingPoints = this.wins * 2 + this.ties;
         this.wtlPerc = (this.gamesPlayed == 0)? 0: (
-            this.rankingPoints / (2 * this.gamesPlayed)
+            this.rankingPoints / (2 * this.matchesPlayed)
         );
 
         this.rank = 1;

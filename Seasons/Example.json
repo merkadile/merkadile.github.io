@@ -127,21 +127,40 @@
             "team1ID": 2,
             "team2ID": 4,
             "week": 2,
-            "games": []
+            "games": [
+                {
+                    "team1Score": 0,
+                    "team2Score": 15
+                },
+                {
+                    "team1Score": 15,
+                    "team2Score": 14
+                }
+            ]
         },
         {
             "id": 5,
             "team1ID": 1,
             "team2ID": 4,
             "week": 3,
-            "games": []
+            "games": [
+                {
+                    "team1Score": 10,
+                    "team2Score": 15
+                }
+            ]
         },
         {
             "id": 6,
             "team1ID": 2,
             "team2ID": 3,
             "week": 3,
-            "games": []
+            "games": [
+                {
+                    "team1Score": 5,
+                    "team2Score": 15
+                }
+            ]
         },
         {
             "id": 7,
