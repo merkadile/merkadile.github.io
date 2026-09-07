@@ -437,5 +437,6 @@ async function main() {
 main();
 
 //  remaining things to do:
+//      a. 2025 is allowing me to try to see match 14 (which does not exist) i need to find out why
 //      1. playoff page implementation (podium, bracket visuals, and playoff chances)
 //      2. team and match pages (make sure to handle playoff matches appropriately)
