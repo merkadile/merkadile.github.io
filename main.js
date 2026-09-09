@@ -238,7 +238,7 @@ function displayTeam(league, season, teamID) {
     
     return `
         <h2>Team Info</h2>
-        <p>${team.name}: ${team.rankingPoints} pts (${rankString})</p>
+        <p>${team.name}: ${team.rankingPoints} pts (Rank: ${rankString})</p>
         <div class="team-card" style="--team-color: ${team.color}">
             <p>This page is still in development... stay tuned!</p>
         </div>
