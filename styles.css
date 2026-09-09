@@ -11,6 +11,8 @@
     --faded-text-color: #707070;
     --active-text-color: #000000;
     --tie-text-color: #000000;
+    --positive-net-color: #409040;
+    --negative-net-color: #B05858;
     --divider-color: #DDDDDD;
     --table-odd-color: #F7F7F7;
     --table-even-color: #FFFFFF;
@@ -53,7 +55,6 @@
 }
 
 html {
-    min-width: max-content;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
 }
@@ -64,7 +65,7 @@ html {
 
 body {
     margin: 0;
-    min-width: 100%;
+    min-width: min-content; /**/
     background-color: var(--primary-color);
     font-family: var(--primary-font-family);
     color: var(--main-text-color);
@@ -73,8 +74,8 @@ body {
 
 main {
     margin: 0 auto;
-    padding: var(--main-vertical-padding) var(--main-horizontal-padding);
     max-width: var(--max-content-width);
+    padding: var(--main-vertical-padding) var(--main-horizontal-padding);
 }
 
 button,
@@ -187,6 +188,14 @@ select {
     border-left: var(--standings-team-border-thickness) solid var(--team-color);
 }
 
+.positive-net-value {
+    color: var(--positive-net-color);
+}
+
+.negative-net-value {
+    color: var(--negative-net-color);
+}
+
 .glossary h4 {
     margin-top: var(--glossary-outside-margin);
     margin-bottom: var(--glossary-inside-margin);
@@ -292,6 +301,7 @@ select {
 
 #header, #nav-buttons{
     border-bottom: var(--divider-width) solid var(--divider-color);
+    min-width: 100%;
 }
 
 #header {
@@ -321,6 +331,7 @@ select {
 #nav-buttons button {
     border: none;
     border-radius: 0;
+    white-space: nowrap;
 }
 
 #nav-buttons button.active {

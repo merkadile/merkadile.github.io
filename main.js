@@ -36,8 +36,19 @@ function displayStandings(league, season) {
                 <td class="right-align">${team.ties}</td>
                 <td class="right-align">${team.rankingPoints}</td>
                 <td class="right-align">${team.wtlPerc.toFixed(3).replace(/^0/, "")}</td>
-                <td class="right-align">${team.netGames}</td>
-                <td class="right-align">${team.netScore}</td>
+        `;
+
+        html += `<td class="right-align`;
+        if (team.netGames > 0) html += ` positive-net-value">+${team.netGames}</td>`;
+        else if (team.netGames < 0) html += ` negative-net-value">${team.netGames}</td>`;
+        else html += `">${team.netGames}</td>`;
+
+        html += `<td class="right-align`;
+        if (team.netScore > 0) html += ` positive-net-value">+${team.netScore}</td>`;
+        else if (team.netScore < 0) html += ` negative-net-value">${team.netScore}</td>`;
+        else html += `">${team.netScore}</td>`;
+
+        html += `
             </tr>
         `;
     }
@@ -437,5 +448,5 @@ async function main() {
 main();
 
 //  remaining things to do:
-//      1. playoff page implementation (podium, bracket visuals, and playoff chances)
-//      2. team and match pages (make sure to handle playoff matches appropriately)
+//      1. team and match pages (make sure to handle playoff matches appropriately)
+//      2. playoff page implementation (podium, bracket visuals, and playoff chances)
