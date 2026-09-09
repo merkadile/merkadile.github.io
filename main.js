@@ -66,10 +66,10 @@ function displayStandings(league, season) {
             </p>
         </span>
         <span class="main-rules">
-            <h3>League Rules:</h4>
+            <h3>League Rules:</h3>
     `;
 
-    html += printArray(league.mainRules);
+    html += printArrayAsList(league.mainRules);
 
     html += `
         </span>
@@ -179,10 +179,23 @@ function displaySchedule(league, season, week) {
 function displayPlayoffs(league, season) {
     document.getElementById("playoffs-button").classList.add("active");
     
-    return `
+    html = `
         <h2>Playoffs</h2>
+    `;
+
+    html += `
+        <span class="playoff-rules">
+            <h3>Playoff Rules:</h3>
+    `;
+
+    html += printArrayAsList(league.playoffs.rules);
+
+    html += `
+        </span>
         <p>This page is still in development... stay tuned!</p>
     `;
+
+    return html;
 }
 
 function displayTiebreaker() {
@@ -306,11 +319,11 @@ function formatDateTime(date) {
     return `${dateWithSuffix} at ${timeString}`;
 }
 
-function printArray(arr) {
+function printArrayAsList(arr) {
     let html = `<ul>`;
 
     for (const elem of arr) {
-        if (Array.isArray(elem)) html += printArray(elem);
+        if (Array.isArray(elem)) html += printArrayAsList(elem);
         else html += `<li>${elem}</li>`;
     }
 
