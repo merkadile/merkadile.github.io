@@ -40,8 +40,8 @@
     --standings-team-border-thickness: 0.5rem;
     --glossary-outside-margin: 1.25rem;
     --glossary-inside-margin: 0.375rem;
-    --main-rules-outside-margin: 1.75rem;
-    --main-rules-inside-margin: 0.375rem;
+    --rules-outside-margin: 1.75rem;
+    --rules-inside-margin: 0.375rem;
     --result-outside-padding: 0.5rem;
     --result-team-border-thickness: 0.25rem;
     --result-acronym-width: 2.5rem;
@@ -211,12 +211,12 @@ select {
     font-weight: bold;
 }
 
-.main-rules h3 {
-    margin-top: var(--main-rules-outside-margin);
-    margin-bottom: var(--main-rules-inside-margin);
+.main-rules h3, .playoff-rules h3 {
+    margin-top: var(--rules-outside-margin);
+    margin-bottom: var(--rules-inside-margin);
 }
 
-.main-rules ul {
+.main-rules ul, .playoff-rules ul {
     margin-top: 0;
 }
 
