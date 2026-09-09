@@ -435,7 +435,7 @@ async function main() {
         &&
         league.hasMatch(id)
         &&
-        league.getMatch(id).week !== "Playoffs" || league.regularSeasonComplete()
+        (league.getMatch(id).week !== "Playoffs" || league.regularSeasonComplete())
         &&
         !week
     ) content.innerHTML = displayMatch(league, season, id);
