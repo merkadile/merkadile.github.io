@@ -163,7 +163,26 @@
             "team2ID": 3,
             "week": 2,
             "games": [
-                
+                {
+                    "team1Score": 2,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 4
+                },
+                {
+                    "team1Score": 6,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 3
+                },
+                {
+                    "team1Score": 5,
+                    "team2Score": 21
+                }
             ]
         },
         {
@@ -172,7 +191,18 @@
             "team2ID": 4,
             "week": 2,
             "games": [
-                
+                {
+                    "team1Score": 6,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 17,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 5,
+                    "team2Score": 21
+                }
             ]
         },
         {
