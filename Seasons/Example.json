@@ -167,14 +167,24 @@
             "team1ID": false,
             "team2ID": false,
             "week": "Playoffs",
-            "games": []
+            "games": [
+                {
+                    "team1Score": 14,
+                    "team2Score": 15
+                }
+            ]
         },
         {
             "id": 8,
             "team1ID": false,
             "team2ID": false,
             "week": "Playoffs",
-            "games": []
+            "games": [
+                {
+                    "team1Score": 15,
+                    "team2Score": 14
+                }
+            ]
         },
         {
             "id": 9,

@@ -16,7 +16,7 @@ class Match {
     isComplete() {
         return (
             (this.games.length > 0) && !(
-                this.week === "Playoffs" && this.winnerID === null
+                this.week === "Playoffs" && this.winner === null
             )
         );
     }
@@ -25,25 +25,38 @@ class Match {
         this.team1GameWins = 0;
         this.team2GameWins = 0;
 
-        this.team1NetScore = 0;
-        this.team2NetScore = 0;
+        this.team1TotalScore = 0;
+        this.team2TotalScore = 0;
 
         for (const game of this.games) {
             if (game.winner() == 1) this.team1GameWins++;
             else this.team2GameWins++;
 
-            this.team1NetScore += game.team1Score - game.team2Score;
-            this.team2NetScore += game.team2Score - game.team1Score;
+            this.team1TotalScore += game.team1Score;
+            this.team2TotalScore += game.team2Score;
         }
 
-        if (this.team1GameWins > this.team2GameWins)
-            this.winnerID = this.team1ID
-        ;
-        else if (this.team2GameWins > this.team1GameWins)
-            this.winnerID = this.team2ID
-        ;
-        else
-            this.winnerID = null
-        ;
+        if (this.week === "Playoffs") {
+            if (this.team1GameWins > this.team2GameWins)
+                this.winner = 1
+            ;
+            else if (this.team2GameWins > this.team1GameWins)
+                this.winner = 2
+            ;
+            else
+                this.winner = null
+            ;
+        }
+        else {
+            if (this.team1GameWins > this.team2GameWins)
+                this.winnerID = this.team1ID
+            ;
+            else if (this.team2GameWins > this.team1GameWins)
+                this.winnerID = this.team2ID
+            ;
+            else
+                this.winnerID = null
+            ;
+        }
     }
 }

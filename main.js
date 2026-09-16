@@ -234,37 +234,201 @@ function displayTiebreaker() {
 function displayTeam(league, season, teamID) {
     const team = league.getTeam(teamID);
 
-    const rankString = team.rankTie? `T-${team.rank}`: `${team.rank}`;
-    
-    return `
-        <h2>Team Info</h2>
-        <p>${team.name}: ${team.rankingPoints} pts (Rank: ${rankString})</p>
-        <div class="team-card" style="--team-color: ${team.color}">
-            <p>This page is still in development... stay tuned!</p>
+    let rankSuffix = "th";
+    if (team.rank % 10 === 1 && team.rank % 100 !== 11) rankSuffix = "st";
+    else if (team.rank % 10 === 2 && team.rank % 100 !== 12) rankSuffix = "nd";
+    else if (team.rank % 10 === 3 && team.rank % 100 !== 13) rankSuffix = "rd";
+    const rankString = team.rankTie? `T-${team.rank}${rankSuffix}`: `${team.rank}${rankSuffix}`;
+
+    const ptsString = (team.rankingPoints === 1)? `${team.rankingPoints} PT`: `${team.rankingPoints} PTS`;
+
+    const netGamesSign = (team.netGames > 0)? "+": "";
+    const netScoreSign = (team.netScore > 0)? "+": "";
+
+    const netGamesStyle = (team.netGames > 0)? "positive": ((team.netGames < 0)? "negative": "neutral");
+    const netScoreStyle = (team.netScore > 0)? "positive": ((team.netScore < 0)? "negative": "neutral");
+
+    let html = `
+        <div style="--team-color: ${team.color};">
+            <div class="team-header">
+                <h2>${team.name}</h2>
+                <div class="team-summary">
+                    <span>${team.wins} - ${team.losses} - ${team.ties}</span>
+                    <span>${ptsString}</span>
+                    <span>${rankString} Place</span>
+                </div>
+            </div>
+
+            <div class="team-grid">
+                <section class="team-card schedule-card">
+                    <div class="team-card-header">Schedule</div>
+                    <div class="team-schedule">
+    `;
+
+    for (const match of team.schedule) {
+        const otherTeam = league.getTeam(
+            ((match.team1ID === team.id)? match.team2ID: match.team1ID)
+        );
+
+        html += `
+            <div class="row">
+                <span class="week">Week ${match.week}</span>
+                <span class="opponent">
+                    <a href="?season=${season}&page=match&id=${match.id}">vs. ${otherTeam.name}</a>
+                </span>
+                <span class="result">
+        `;
+
+        if (match.isComplete()) {
+            let thisGameWins, otherGameWins, result;
+
+            if (match.team1ID === team.id) {
+                thisGameWins = match.team1GameWins;
+                otherGameWins = match.team2GameWins;
+            }
+            else {
+                thisGameWins = match.team2GameWins;
+                otherGameWins = match.team1GameWins;
+            }
+
+            if (match.winnerID === null) result = "T";
+            else if (match.winnerID === team.id) result = "W";
+            else result = "L";
+
+            html += `<span class="result-${result}">${result} </span><span class="gamesWon">(${thisGameWins}-${otherGameWins})</span>`
+        }
+        else html += `<span class="result-TBD">TBD</span>`;
+
+        html += `</span></div>`;
+    }
+
+    html += `
+            </div>
+        </section>
+
+        <section class="team-card players-card">
+            <div class="team-card-header">Players</div>
+            <div class="player-list">
+    `;
+
+    for (const player of team.players) html += `<span>${player}</span>`;
+
+    html += `
+                    </div>
+                </section>
+
+                <section class="team-card stats-card">
+                    <div class="team-card-header">Stats</div>
+                    <div class="stats-grid">
+                        <div>
+                            <span class="stat-label">Win-Tie-Loss Percent</span>
+                            <span class="stat-value-rank">
+                                <span class="stat-value-neutral">${team.wtlPerc.toFixed(3).replace(/^0/, "")} </span>
+                                <span class="stat-ranking">(${league.getStatRanking("wtlPerc", team.id)})</span>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="stat-label">Game Winning Percent</span>
+                            <span class="stat-value-rank">
+                                <span class="stat-value-neutral">${team.gameWinPerc.toFixed(3).replace(/^0/, "")} </span>
+                                <span class="stat-ranking">(${league.getStatRanking("gameWinPerc", team.id)})</span>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="stat-label">Net Games Won/Lost</span>
+                            <span class="stat-value-rank">
+                                <span class="stat-value-${netGamesStyle}">${netGamesSign}${team.netGames} </span>
+                                <span class="stat-ranking">(${league.getStatRanking("netGames", team.id)})</span>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="stat-label">Net Score For/Against</span>
+                            <span class="stat-value-rank">
+                                <span class="stat-value-${netScoreStyle}">${netScoreSign}${team.netScore} </span>
+                                <span class="stat-ranking">(${league.getStatRanking("netScore", team.id)})</span>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="stat-label">Avg. Games Won per Match</span>
+                            <span class="stat-value-rank">
+                                <span class="stat-value-neutral">${team.avgGamesWonPerMatch.toFixed(2)} </span>
+                                <span class="stat-ranking">(${league.getStatRanking("avgGamesWonPerMatch", team.id)})</span>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="stat-label">Avg. Games Lost per Match</span>
+                            <span class="stat-value-rank">
+                                <span class="stat-value-neutral">${team.avgGamesLostPerMatch.toFixed(2)} </span>
+                                <span class="stat-ranking">(${league.getStatRanking("avgGamesLostPerMatch", team.id)})</span>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="stat-label">Avg. Score For per Game</span>
+                            <span class="stat-value-rank">
+                                <span class="stat-value-neutral">${team.avgScoreForPerGame.toFixed(1)} </span>
+                                <span class="stat-ranking">(${league.getStatRanking("avgScoreForPerGame", team.id)})</span>
+                            </span>
+                        </div>
+                        <div>
+                            <span class="stat-label">Avg. Score Against per Game</span>
+                            <span class="stat-value-rank">
+                                <span class="stat-value-neutral">${team.avgScoreAgainstPerGame.toFixed(1)} </span>
+                                <span class="stat-ranking">(${league.getStatRanking("avgScoreAgainstPerGame", team.id)})</span>
+                            </span>
+                        </div>
+                    </div>
+                </section>
+            </div>
         </div>
     `;
+    
+    return html;
 }
 
 function displayMatch(league, season, matchID) {
     const match = league.getMatch(matchID);
-    const team1 = league.getTeam(match.team1ID);
-    const team2 = league.getTeam(match.team2ID);
+    let team1, team2;
 
-    let html = `
-        <h2>Match Info</h2>
-    `;
+    let html = ``;
     
     if (match.week === "Playoffs") {
         const playoffMatchStructure = league.getPlayoffMatchStructure(matchID);
+        const bracketName = league.playoffs.bracketNames[
+            playoffMatchStructure.bracketIndex
+        ];
+        const roundName = league.playoffs.roundNames[
+            playoffMatchStructure.roundIndex
+        ];
 
-        html += `
-            <p>Playoff Match ${matchID}</p>
-        `;
+        team1 = findPlayoffTeam(league, playoffMatchStructure.teamSlots[0]);
+        team2 = findPlayoffTeam(league, playoffMatchStructure.teamSlots[1]);
+
+        const team1Name = (team1 === null)? "[TBD]": team1.name;
+        const team2Name = (team2 === null)? "[TBD]": team2.name;
+
+        html += `<h2>${team1Name} vs. ${team2Name} - `;
+
+        if (roundName !== null) html += `${roundName}`;
+        else html += `Playoffs`;
+
+        if (bracketName !== null) html += ` (${bracketName})`;
+
+        html += `</h2>`;
     }
     else {
+        team1 = league.getTeam(match.team1ID);
+        team2 = league.getTeam(match.team2ID);
+
         html += `
-            <p>${team1.name} vs. ${team2.name} - Week ${match.week}</p>
+            <h2>${team1.name} vs. ${team2.name} - Week ${match.week}</h2>
         `;
+    }
+
+    if (team1 === null || team2 === null || !(match.isComplete())) {
+        //TODO: display card with match time/date/location
+    }
+    else {
+        //TODO: display detailed match results
     }
 
     html += `
@@ -330,6 +494,24 @@ function printArrayAsList(arr) {
     html += `</ul>`
 
     return html;
+}
+
+function findPlayoffTeam(league, teamSlot) {
+    if (teamSlot.sourceType === "rankings") return league.teams[teamSlot.rank - 1];
+    else if (teamSlot.sourceType === "match") {
+        const sourceMatch = league.getMatch(teamSlot.matchID);
+        const sourceMatchStructure = league.getPlayoffMatchStructure(teamSlot.matchID)
+
+        if (!(sourceMatch.isComplete())) return null;
+        else if (teamSlot.result === "winner") return findPlayoffTeam(
+            league, sourceMatchStructure.teamSlots[sourceMatch.winner - 1]
+        );
+        else if (teamSlot.result === "loser") return findPlayoffTeam(
+            league, sourceMatchStructure.teamSlots[2 - sourceMatch.winner]
+        );
+        else return null;
+    }
+    else return null;
 }
 
 async function main() {
@@ -461,5 +643,6 @@ async function main() {
 main();
 
 //  remaining things to do:
-//      1. team and match pages (make sure to handle playoff matches appropriately)
-//      2. playoff page implementation (podium, bracket visuals, and playoff chances)
+//      1. add dividers and odd/even table coloring to player grid and refine/consolidate css from team stuff
+//      2. match pages
+//      3. playoff page implementation (podium, bracket visuals, and playoff chances)

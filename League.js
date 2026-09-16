@@ -34,14 +34,18 @@ class League {
         this.tiebreakers = data.tiebreakers;
 
         this.teams = this.rankTeams(this.teams);
+
+        this.wtlPercRanking = this.generateStatRanking("wtlPerc", true);
+        this.gameWinPercRanking = this.generateStatRanking("gameWinPerc", true);
+        this.netGamesRanking = this.generateStatRanking("netGames", true);
+        this.netScoreRanking = this.generateStatRanking("netScore", true);
+        this.avgGamesWonPerMatchRanking = this.generateStatRanking("avgGamesWonPerMatch", true);
+        this.avgGamesLostPerMatchRanking = this.generateStatRanking("avgGamesLostPerMatch", false);
+        this.avgScoreForPerGameRanking = this.generateStatRanking("avgScoreForPerGame", true);
+        this.avgScoreAgainstPerGameRanking = this.generateStatRanking("avgScoreAgainstPerGame", false);
     }
 
     rankTeams(teamsToRank) {
-        for (const team of teamsToRank) {
-            team.updateRank(1);
-            team.updateRankTie(false);
-        }
-
         this.sortDescByField(teamsToRank, 1, "rankingPoints", null);
 
         teamsToRank.sort((a, b) => a.rank - b.rank);
@@ -141,7 +145,11 @@ class League {
                             (match.team1GameWins - match.team2GameWins)
                         );
 
-                        hthNetScore += (match.team1ID === team.id)? match.team1NetScore: match.team2NetScore;
+                        hthNetScore += (
+                            ((match.team1ID === team.id)? 1: -1)
+                            *
+                            (match.team1TotalScore - match.team2TotalScore)
+                        );
                     }
                 }
             }
@@ -201,6 +209,54 @@ class League {
         if (tiebreakerInfo.length > 0) this.sortDescByField(tiedTeams, tiedRank, "tiePoints", tiebreakerInfo);
     }
 
+    generateStatRanking(statField, descSort) {
+        let rankingMap = new Map();
+
+        let teamOrder = [];
+        for (const team of this.teams) teamOrder.push({"teamID": team.id, "rank": 1});
+
+        if (descSort === true)
+            teamOrder.sort((a, b) => this.getTeam(b.teamID)[statField] - this.getTeam(a.teamID)[statField])
+        ;
+        else
+            teamOrder.sort((a, b) => this.getTeam(a.teamID)[statField] - this.getTeam(b.teamID)[statField])
+        ;
+
+        let curRank = 1;
+        let numTeamsAtRank = 1;
+        for (let i = 1; i < teamOrder.length; i++) {
+            const curTeamField = this.getTeam(teamOrder[i].teamID)[statField];
+            const prevTeamField = this.getTeam(teamOrder[i - 1].teamID)[statField];
+
+            if (Math.abs(curTeamField - prevTeamField) > 0.000001) curRank = i + 1;
+            teamOrder[i].rank = curRank;
+        }
+
+        for (let i = 0; i < teamOrder.length; i++) {
+            let rankSuffix = "th";
+            if (teamOrder[i].rank % 10 === 1 && teamOrder[i].rank % 100 !== 11) rankSuffix = "st";
+            else if (teamOrder[i].rank % 10 === 2 && teamOrder[i].rank % 100 !== 12) rankSuffix = "nd";
+            else if (teamOrder[i].rank % 10 === 3 && teamOrder[i].rank % 100 !== 13) rankSuffix = "rd";
+            const rankString = (
+                ((i > 0) && (
+                    teamOrder[i].rank
+                    ===
+                    teamOrder[i - 1].rank
+                ))
+                ||
+                ((i < teamOrder.length - 1) && (
+                    teamOrder[i].rank
+                    ===
+                    teamOrder[i + 1].rank
+                ))
+            )? `T-${teamOrder[i].rank}${rankSuffix}`: `${teamOrder[i].rank}${rankSuffix}`;
+
+            rankingMap.set(teamOrder[i].teamID, rankString);
+        }
+
+        return rankingMap;
+    }
+
     getTeam(id) {
         return this.teamMap.get(id);
     }
@@ -223,6 +279,10 @@ class League {
 
     hasPlayoffMatchStructure(id) {
         return this.playoffStructureMap.has(id);
+    }
+
+    getStatRanking(statField, id) {
+        return this[`${statField}Ranking`].get(id);
     }
 
     regularSeasonComplete() {
