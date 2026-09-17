@@ -643,6 +643,9 @@ async function main() {
 main();
 
 //  remaining things to do:
-//      1. add dividers and odd/even table coloring to player grid and refine/consolidate css from team stuff
-//      2. match pages
-//      3. playoff page implementation (podium, bracket visuals, and playoff chances)
+//      1. add forfeit mechanics to the league (most likely would go into the match class, but i need to check everything in case somewhere else relies on the number of games won to determine winning)
+//      2. change it so schedule page and team page and match page indicate if there's been a forfeit (for example: WAR 2 - 2(F) SYC, indicating that WAR won the match because SYC forfeited)
+//      3. update rules for what uncle e and i talked about
+//      4. add dividers and odd/even table coloring to player grid and refine/consolidate css from team stuff
+//      5. match pages
+//      6. playoff page implementation (podium, bracket visuals, and playoff chances)
