@@ -20,6 +20,7 @@
     --team-W-color: #409040;
     --team-T-color: #222222;
     --team-L-color: #B05858;
+    --forfeit-color: #FF2020;
     --main-font-size: 1.0rem;
     --small-font-size: 0.85rem;
     --main-vertical-padding: 1.5rem;
@@ -286,6 +287,10 @@ h2 {
     font-weight: bold;
 }
 
+.forfeit {
+    color: var(--forfeit-color);
+}
+
 .match-incomplete {
     color: var(--faded-text-color);
     font-style: italic;
@@ -440,12 +445,41 @@ h2 {
 
 /* Players */
 
-.player-list {
+.player-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-columns: 1fr;
+}
 
-    padding: 1.25rem;
-    gap: 0.75rem 1.5rem;
+.player-grid > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+
+    border-bottom: var(--divider-width) solid var(--divider-color);
+}
+
+.player-grid > div:nth-child(4n + 3), .player-grid > div:nth-child(4n) {
+    background-color: var(--table-even-color);
+}
+
+.player-grid > div:nth-child(4n + 1), .player-grid > div:nth-child(4n + 2) {
+    background-color: var(--table-odd-color);
+}
+
+.player-grid > div:nth-child(odd) {
+    border-right: var(--divider-width) solid var(--divider-color);
+}
+
+.player-grid > div:nth-last-child(2):has(+ .empty-player-cell) {
+    border-right: none;
+}
+
+.player-grid > div:nth-last-child(-n + 2) {
+    border-bottom: none;
 }
 
 /* Schedule */
@@ -530,14 +564,12 @@ h2 {
     border-top: var(--divider-width) solid var(--divider-color);
 }
 
-/*fix this because even and odd is not the reason for it*/
-.stats-grid > div:nth-child(even) {
+.stats-grid > div:nth-child(4n), .stats-grid > div:nth-child(4n + 2) {
     background-color: var(--table-even-color);
 }
-.stats-grid > div:nth-child(odd) {
+.stats-grid > div:nth-child(4n + 1), .stats-grid > div:nth-child(4n + 3) {
     background-color: var(--table-odd-color);
 }
-/**/
 
 .stat-label {
     color: var(--faded-text-color);

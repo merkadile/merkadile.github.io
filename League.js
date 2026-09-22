@@ -26,9 +26,9 @@ class League {
             team.calculateStatistics(this);
         }
 
-        for (const matchStructureData of data.playoffs.matchStructure) {
-            this.playoffStructureMap.set(matchStructureData.matchID, matchStructureData);
-        }
+        for (const matchStructureData of data.playoffs.matchStructure)
+            this.playoffStructureMap.set(matchStructureData.matchID, matchStructureData)
+        ;
 
         this.playoffs = data.playoffs;
         this.tiebreakers = data.tiebreakers;

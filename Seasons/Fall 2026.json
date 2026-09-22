@@ -43,9 +43,14 @@
         [
             "Teams will complete as many games as possible in that allotted time period.",
             "The team with the most games won in the time period will be declared the winner of the match.",
-            "If both teams win equal numbers of games, they tie the match."
+            "If both teams win equal numbers of games, they tie the match.",
+            "No new game will start after 50 minutes. Games already in progress after 50 minutes will continue until completed, regardless of time remaining.",
+            "Teams must continue playing if it is before the 50 minute mark unless an early stop is agreed upon by both teams. If one team refuses to play, they forfeit the match.",
+            [
+                "A forfeit counts as a match loss for the team that forfeits and a match win for their opponent.",
+                "The exact terms of the forfeit (any potential adjustments to game and score results of the match) shall be up to the commissioners to decide."
+            ]
         ],
-        "No new game will start after 50 minutes. Games already in progress after 50 minutes will continue until completed, regardless of time remaining.",
         "A full team is at least 4 players. Teams should try their best to show up with a full team when possible.",
         "Each game in a match shall be played by only two players.",
         [
@@ -54,7 +59,7 @@
         ],
         "Each team may reach out and acquire an alternate if a regular player is not available to play a match.",
         [
-            "The alternate must be the same level or lower than the player being replaced.",
+            "The alternate must be of the same or lower skill level than the player being replaced.",
             "Alternates that show up without a request from a team, may not be able to play."
         ],
         "Each player pays $5 each week during the regular season. All money should be given to Commissioner Mark."
@@ -119,6 +124,7 @@
             "team1ID": 1,
             "team2ID": 2,
             "week": 1,
+            "forfeit": null,
             "games": [
                 {
                     "team1Score": 3,
@@ -143,6 +149,7 @@
             "team1ID": 3,
             "team2ID": 4,
             "week": 1,
+            "forfeit": null,
             "games": [
                 {
                     "team1Score": 7,
@@ -163,6 +170,7 @@
             "team1ID": 1,
             "team2ID": 3,
             "week": 2,
+            "forfeit": null,
             "games": [
                 {
                     "team1Score": 2,
@@ -191,6 +199,7 @@
             "team1ID": 2,
             "team2ID": 4,
             "week": 2,
+            "forfeit": null,
             "games": [
                 {
                     "team1Score": 6,
@@ -211,6 +220,7 @@
             "team1ID": 1,
             "team2ID": 4,
             "week": 3,
+            "forfeit": null,
             "games": [
                 {
                     "team1Score": 21,
@@ -235,6 +245,7 @@
             "team1ID": 2,
             "team2ID": 3,
             "week": 3,
+            "forfeit": null,
             "games": [
                 {
                     "team1Score": 13,
@@ -255,6 +266,7 @@
             "team1ID": 1,
             "team2ID": 2,
             "week": 4,
+            "forfeit": null,
             "games": [
 
             ]
@@ -264,6 +276,7 @@
             "team1ID": 3,
             "team2ID": 4,
             "week": 4,
+            "forfeit": null,
             "games": [
                 
             ]
@@ -273,6 +286,7 @@
             "team1ID": 1,
             "team2ID": 3,
             "week": 5,
+            "forfeit": null,
             "games": [
                 
             ]
@@ -282,6 +296,7 @@
             "team1ID": 2,
             "team2ID": 4,
             "week": 5,
+            "forfeit": null,
             "games": [
                 
             ]
@@ -291,6 +306,7 @@
             "team1ID": 1,
             "team2ID": 4,
             "week": 6,
+            "forfeit": null,
             "games": [
                 
             ]
@@ -300,6 +316,7 @@
             "team1ID": 2,
             "team2ID": 3,
             "week": 6,
+            "forfeit": null,
             "games": [
                 
             ]
@@ -309,6 +326,7 @@
             "team1ID": 1,
             "team2ID": 2,
             "week": 7,
+            "forfeit": null,
             "games": [
 
             ]
@@ -318,6 +336,7 @@
             "team1ID": 3,
             "team2ID": 4,
             "week": 7,
+            "forfeit": null,
             "games": [
                 
             ]
@@ -327,6 +346,7 @@
             "team1ID": 1,
             "team2ID": 3,
             "week": 8,
+            "forfeit": null,
             "games": [
                 
             ]
@@ -336,6 +356,7 @@
             "team1ID": 2,
             "team2ID": 4,
             "week": 8,
+            "forfeit": null,
             "games": [
                 
             ]
@@ -345,6 +366,7 @@
             "team1ID": 1,
             "team2ID": 4,
             "week": 9,
+            "forfeit": null,
             "games": [
                 
             ]
@@ -354,6 +376,7 @@
             "team1ID": 2,
             "team2ID": 3,
             "week": 9,
+            "forfeit": null,
             "games": [
                 
             ]

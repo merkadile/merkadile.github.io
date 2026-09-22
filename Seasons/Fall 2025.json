@@ -31,9 +31,9 @@
         [
             "Teams will complete as many games as possible in that allotted time period.",
             "The team with the most games won in the time period will be declared the winner of the match.",
-            "If both teams win equal numbers of games, they tie the match."
+            "If both teams win equal numbers of games, they tie the match.",
+            "No new game will start after 50 minutes. Games already in progress after 50 minutes will continue until completed, regardless of time remaining."
         ],
-        "No new game will start after 50 minutes. Games already in progress after 50 minutes will continue until completed, regardless of time remaining.",
         "A full team is 4 players. Teams must have enough players show up each week in order to compete.",
         "Each game in a match shall be played by only two players.",
         [
@@ -89,6 +89,7 @@
             "team1ID": 1,
             "team2ID": 2,
             "week": 1,
+            "forfeit": null,
             "games": [
                 {
                     "team1Score": 21,
@@ -113,6 +114,7 @@
             "team1ID": 1,
             "team2ID": 3,
             "week": 1,
+            "forfeit": null,
             "games": [
                 {
                     "team1Score": 7,
@@ -137,6 +139,7 @@
             "team1ID": 2,
             "team2ID": 3,
             "week": 2,
+            "forfeit": null,
             "games": [
                 {
                     "team1Score": 20,
@@ -161,6 +164,7 @@
             "team1ID": 2,
             "team2ID": 1,
             "week": 2,
+            "forfeit": null,
             "games": [
                 {
                     "team1Score": 6,
@@ -185,6 +189,7 @@
             "team1ID": 3,
             "team2ID": 1,
             "week": 3,
+            "forfeit": null,
             "games": [
                 {
                     "team1Score": 5,
@@ -205,6 +210,7 @@
             "team1ID": 3,
             "team2ID": 2,
             "week": 3,
+            "forfeit": null,
             "games": [
                 {
                     "team1Score": 20,
@@ -229,6 +235,7 @@
             "team1ID": 1,
             "team2ID": 2,
             "week": 4,
+            "forfeit": null,
             "games": [
                 {
                     "team1Score": 21,
@@ -249,6 +256,7 @@
             "team1ID": 1,
             "team2ID": 3,
             "week": 4,
+            "forfeit": null,
             "games": [
                 {
                     "team1Score": 16,
@@ -269,6 +277,7 @@
             "team1ID": 2,
             "team2ID": 3,
             "week": 5,
+            "forfeit": null,
             "games": [
                 {
                     "team1Score": 0,
@@ -293,6 +302,7 @@
             "team1ID": 2,
             "team2ID": 1,
             "week": 5,
+            "forfeit": null,
             "games": [
                 {
                     "team1Score": 9,
@@ -313,6 +323,7 @@
             "team1ID": 3,
             "team2ID": 1,
             "week": 6,
+            "forfeit": null,
             "games": [
                 {
                     "team1Score": 15,
@@ -333,6 +344,7 @@
             "team1ID": 3,
             "team2ID": 2,
             "week": 6,
+            "forfeit": null,
             "games": [
                 {
                     "team1Score": 21,
@@ -350,8 +362,6 @@
         },
         {
             "id": 13,
-            "team1ID": false,
-            "team2ID": false,
             "week": "Playoffs",
             "games": [
                 {

@@ -4,6 +4,7 @@ class Match {
         this.team1ID = data.team1ID;
         this.team2ID = data.team2ID;
         this.week = data.week;
+        this.forfeit = data.forfeit;
 
         this.games = [];
         for (const gameData of data.games)
@@ -15,8 +16,16 @@ class Match {
 
     isComplete() {
         return (
-            (this.games.length > 0) && !(
-                this.week === "Playoffs" && this.winner === null
+            (
+                this.games.length > 0
+                &&
+                !(this.week === "Playoffs" && this.winner === null)
+            )
+            ||
+            (
+                this.week !== "Playoffs"
+                &&
+                this.forfeit !== null
             )
         );
     }
@@ -37,26 +46,17 @@ class Match {
         }
 
         if (this.week === "Playoffs") {
-            if (this.team1GameWins > this.team2GameWins)
-                this.winner = 1
-            ;
-            else if (this.team2GameWins > this.team1GameWins)
-                this.winner = 2
-            ;
-            else
-                this.winner = null
-            ;
+            if (this.team1GameWins > this.team2GameWins) this.winner = 1;
+            else if (this.team2GameWins > this.team1GameWins) this.winner = 2;
+            else this.winner = null;
         }
         else {
-            if (this.team1GameWins > this.team2GameWins)
-                this.winnerID = this.team1ID
-            ;
-            else if (this.team2GameWins > this.team1GameWins)
-                this.winnerID = this.team2ID
-            ;
-            else
-                this.winnerID = null
-            ;
+            if (this.team1GameWins > this.team2GameWins) this.winnerID = this.team1ID;
+            else if (this.team2GameWins > this.team1GameWins) this.winnerID = this.team2ID;
+            else this.winnerID = null;
+
+            if (this.forfeit === 1) this.winnerID = this.team2ID;
+            else if (this.forfeit === 2) this.winnerID = this.team1ID;
         }
     }
 }

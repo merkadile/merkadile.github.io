@@ -145,19 +145,57 @@ function displaySchedule(league, season, week) {
             `;
 
             if (match.isComplete()) {
-                html += `<span class="result-team-1 match-`;
+                if (match.winnerID === team1.id) html += `
+                    <span class="result-team-1 match-winner" style="--team-color: ${team1.color};">
+                `;
+                else if (match.winnerID === team2.id) html += `
+                    <span class="result-team-1 match-loser" style="--team-color: ${team1.color};">
+                `;
+                else html += `
+                    <span class="result-team-1 match-tier" style="--team-color: ${team1.color};">
+                `;
 
-                if (match.winnerID === team1.id) html += `winner`;
-                else if (match.winnerID === team2.id) html += `loser`;
-                else html += `tier`;
+                html += `<span class="acronym">${team1.acronym}</span>`;
 
-                html += `" style="--team-color: ${team1.color};"><span class="acronym">${team1.acronym}</span><span class="game-wins">${match.team1GameWins}</span></span><span class="result-separator">-</span><span class="result-team-2 match-`;
+                if (match.forfeit === 1) html += `
+                    <span class="game-wins forfeit">F</span>
+                `;
+                else if (match.forfeit === 2) html += `
+                    <span class="game-wins"></span>
+                `;
+                else html += `
+                    <span class="game-wins">${match.team1GameWins}</span>
+                `;
 
-                if (match.winnerID === team2.id) html += `winner`;
-                else if (match.winnerID === team1.id) html += `loser`;
-                else html += `tier`;
+                html += `
+                    </span>
+                    <span class="result-separator">-</span>
+                `;
 
-                html += `" style="--team-color: ${team2.color};"><span class="game-wins">${match.team2GameWins}</span><span class="acronym">${team2.acronym}</span></span>`;
+                if (match.winnerID === team2.id) html += `
+                    <span class="result-team-2 match-winner" style="--team-color: ${team2.color};">
+                `;
+                else if (match.winnerID === team1.id) html += `
+                    <span class="result-team-2 match-loser" style="--team-color: ${team2.color};">
+                `;
+                else html += `
+                    <span class="result-team-2 match-tier" style="--team-color: ${team2.color};">
+                `;
+
+                if (match.forfeit === 2) html += `
+                    <span class="game-wins forfeit">F</span>
+                `;
+                else if (match.forfeit === 1) html += `
+                    <span class="game-wins"></span>
+                `;
+                else html += `
+                    <span class="game-wins">${match.team2GameWins}</span>
+                `;
+
+                html += `
+                        <span class="acronym">${team2.acronym}</span>
+                    </span>
+                `;
             }
             else html += `<span class="match-incomplete">TBD</span>`;
 
@@ -280,22 +318,30 @@ function displayTeam(league, season, teamID) {
         `;
 
         if (match.isComplete()) {
-            let thisGameWins, otherGameWins, result;
+            let thisGameWins, otherGameWins, thisForfeit, oppForfeit, result;
 
             if (match.team1ID === team.id) {
                 thisGameWins = match.team1GameWins;
                 otherGameWins = match.team2GameWins;
+                thisForfeit = (match.forfeit === 1);
+                oppForfeit = (match.forfeit === 2);
             }
             else {
                 thisGameWins = match.team2GameWins;
                 otherGameWins = match.team1GameWins;
+                thisForfeit = (match.forfeit === 2);
+                oppForfeit = (match.forfeit === 1);
             }
 
             if (match.winnerID === null) result = "T";
             else if (match.winnerID === team.id) result = "W";
             else result = "L";
 
-            html += `<span class="result-${result}">${result} </span><span class="gamesWon">(${thisGameWins}-${otherGameWins})</span>`
+            html += `<span class="result-${result}">${result} </span>`;
+
+            if (thisForfeit) html += `<span class="gamesWon">(forfeit)</span>`;
+            else if (oppForfeit) html += `<span class="gamesWon">(opp forfeit)</span>`;
+            else html += `<span class="gamesWon">(${thisGameWins}-${otherGameWins})</span>`;
         }
         else html += `<span class="result-TBD">TBD</span>`;
 
@@ -308,10 +354,13 @@ function displayTeam(league, season, teamID) {
 
         <section class="team-card players-card">
             <div class="team-card-header">Players</div>
-            <div class="player-list">
+            <div class="player-grid">
     `;
 
-    for (const player of team.players) html += `<span>${player}</span>`;
+    for (const player of team.players) html += `<div>${player}</div>`;
+    if (team.players.length % 2 !== 0)
+        html += `<div class="empty-player-cell"></div>`
+    ;
 
     html += `
                     </div>
@@ -643,9 +692,6 @@ async function main() {
 main();
 
 //  remaining things to do:
-//      1. add forfeit mechanics to the league (most likely would go into the match class, but i need to check everything in case somewhere else relies on the number of games won to determine winning)
-//      2. change it so schedule page and team page and match page indicate if there's been a forfeit (for example: WAR 2 - 2(F) SYC, indicating that WAR won the match because SYC forfeited)
-//      3. update rules for what uncle e and i talked about
-//      4. add dividers and odd/even table coloring to player grid and refine/consolidate css from team stuff
-//      5. match pages
-//      6. playoff page implementation (podium, bracket visuals, and playoff chances)
+//      1. refine/consolidate css from team stuff
+//      2. match pages (make sure to account for forfeit possibility)
+//      3. playoff page implementation (podium, bracket visuals, and playoff chances)
