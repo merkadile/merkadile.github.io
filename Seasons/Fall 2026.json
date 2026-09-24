@@ -268,7 +268,22 @@
             "week": 4,
             "forfeit": null,
             "games": [
-
+                {
+                    "team1Score": 21,
+                    "team2Score": 9
+                },
+                {
+                    "team1Score": 2,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 8
+                },
+                {
+                    "team1Score": 3,
+                    "team2Score": 21
+                }
             ]
         },
         {
@@ -278,7 +293,22 @@
             "week": 4,
             "forfeit": null,
             "games": [
-                
+                {
+                    "team1Score": 21,
+                    "team2Score": 12
+                },
+                {
+                    "team1Score": 16,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 20
+                },
+                {
+                    "team1Score": 9,
+                    "team2Score": 21
+                }
             ]
         },
         {
@@ -413,7 +443,7 @@
         ],
         "matchDates": [
             {
-                "date": "2026-11-05T00:00:00.000Z",
+                "date": "2026-10-31T17:00:00.000Z",
                 "location": "Location TBD"
             }
         ],
