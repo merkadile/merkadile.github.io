@@ -90,6 +90,7 @@
             "team2ID": 2,
             "week": 1,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 {
                     "team1Score": 21,
@@ -115,6 +116,7 @@
             "team2ID": 3,
             "week": 1,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 {
                     "team1Score": 7,
@@ -140,6 +142,7 @@
             "team2ID": 3,
             "week": 2,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 {
                     "team1Score": 20,
@@ -165,6 +168,7 @@
             "team2ID": 1,
             "week": 2,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 {
                     "team1Score": 6,
@@ -190,6 +194,7 @@
             "team2ID": 1,
             "week": 3,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 {
                     "team1Score": 5,
@@ -211,6 +216,7 @@
             "team2ID": 2,
             "week": 3,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 {
                     "team1Score": 20,
@@ -236,6 +242,7 @@
             "team2ID": 2,
             "week": 4,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 {
                     "team1Score": 21,
@@ -257,6 +264,7 @@
             "team2ID": 3,
             "week": 4,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 {
                     "team1Score": 16,
@@ -278,6 +286,7 @@
             "team2ID": 3,
             "week": 5,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 {
                     "team1Score": 0,
@@ -303,6 +312,7 @@
             "team2ID": 1,
             "week": 5,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 {
                     "team1Score": 9,
@@ -324,6 +334,7 @@
             "team2ID": 1,
             "week": 6,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 {
                     "team1Score": 15,
@@ -345,6 +356,7 @@
             "team2ID": 2,
             "week": 6,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 {
                     "team1Score": 21,
@@ -363,6 +375,7 @@
         {
             "id": 13,
             "week": "Playoffs",
+            "forfeit": null,
             "games": [
                 {
                     "team1Score": 21,

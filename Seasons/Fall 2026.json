@@ -125,6 +125,7 @@
             "team2ID": 2,
             "week": 1,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 {
                     "team1Score": 3,
@@ -150,6 +151,7 @@
             "team2ID": 4,
             "week": 1,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 {
                     "team1Score": 7,
@@ -171,6 +173,7 @@
             "team2ID": 3,
             "week": 2,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 {
                     "team1Score": 2,
@@ -200,6 +203,7 @@
             "team2ID": 4,
             "week": 2,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 {
                     "team1Score": 6,
@@ -221,6 +225,7 @@
             "team2ID": 4,
             "week": 3,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 {
                     "team1Score": 21,
@@ -246,6 +251,7 @@
             "team2ID": 3,
             "week": 3,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 {
                     "team1Score": 13,
@@ -267,6 +273,7 @@
             "team2ID": 2,
             "week": 4,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 {
                     "team1Score": 21,
@@ -292,6 +299,7 @@
             "team2ID": 4,
             "week": 4,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 {
                     "team1Score": 21,
@@ -317,6 +325,7 @@
             "team2ID": 3,
             "week": 5,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 
             ]
@@ -327,6 +336,7 @@
             "team2ID": 4,
             "week": 5,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 
             ]
@@ -337,6 +347,7 @@
             "team2ID": 4,
             "week": 6,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 
             ]
@@ -347,6 +358,7 @@
             "team2ID": 3,
             "week": 6,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 
             ]
@@ -357,6 +369,7 @@
             "team2ID": 2,
             "week": 7,
             "forfeit": null,
+            "cancel": false,
             "games": [
 
             ]
@@ -367,6 +380,7 @@
             "team2ID": 4,
             "week": 7,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 
             ]
@@ -377,6 +391,7 @@
             "team2ID": 3,
             "week": 8,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 
             ]
@@ -387,6 +402,7 @@
             "team2ID": 4,
             "week": 8,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 
             ]
@@ -397,6 +413,7 @@
             "team2ID": 4,
             "week": 9,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 
             ]
@@ -407,6 +424,7 @@
             "team2ID": 3,
             "week": 9,
             "forfeit": null,
+            "cancel": false,
             "games": [
                 
             ]
@@ -414,6 +432,7 @@
         {
             "id": 19,
             "week": "Playoffs",
+            "forfeit": null,
             "games": [
                 
             ]
@@ -421,6 +440,7 @@
         {
             "id": 20,
             "week": "Playoffs",
+            "forfeit": null,
             "games": [
                 
             ]

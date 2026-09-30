@@ -144,7 +144,8 @@ function displaySchedule(league, season, week) {
                     <td class="left-align match-result">
             `;
 
-            if (match.isComplete()) {
+            if (match.cancel) html += `<span class="match-cancel">Cancelled</span>`;
+            else if (match.isComplete()) {
                 if (match.winnerID === team1.id) html += `
                     <span class="result-team-1 match-winner" style="--team-color: ${team1.color};">
                 `;
@@ -317,7 +318,8 @@ function displayTeam(league, season, teamID) {
                 <span class="result">
         `;
 
-        if (match.isComplete()) {
+        if (match.cancel) html += `<span class="result-cancel">Cancelled</span>`;
+        else if (match.isComplete()) {
             let thisGameWins, otherGameWins, thisForfeit, oppForfeit, result;
 
             if (match.team1ID === team.id) {
@@ -367,7 +369,7 @@ function displayTeam(league, season, teamID) {
                 </section>
 
                 <section class="team-card stats-card">
-                    <div class="team-card-header">Stats</div>
+                    <div class="team-card-header">Statistics</div>
                     <div class="stats-grid">
                         <div>
                             <span class="stat-label">Win-Tie-Loss Percent</span>
@@ -692,6 +694,5 @@ async function main() {
 main();
 
 //  remaining things to do:
-//      1. refine/consolidate css from team stuff
-//      2. match pages (make sure to account for forfeit possibility)
-//      3. playoff page implementation (podium, bracket visuals, and playoff chances)
+//      1. match pages (make sure to account for forfeit or cancel possibility [in the case that there's both cancel and forfeit selected, cancel should be displayed because that's what gets recorded internally])
+//      2. playoff page implementation (podium, bracket visuals, and playoff chances [make sure to display forfeits properly])

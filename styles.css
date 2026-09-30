@@ -5,6 +5,9 @@
     --h1-h6-font-family: "Inter", sans-serif;
     --season-selector-font-family: Verdana, sans-serif;
     --nav-buttons-font-family: Helvetica, sans-serif;
+
+    --team-summary-divider: " | ";
+
     --primary-color: #F7F7F7;
     --secondary-color: #FFFFFF;
     --main-text-color: #222222;
@@ -20,7 +23,8 @@
     --team-W-color: #409040;
     --team-T-color: #222222;
     --team-L-color: #B05858;
-    --forfeit-color: #FF2020;
+    --forfeit-cancel-color: #FF2020;
+
     --main-font-size: 1.0rem;
     --small-font-size: 0.85rem;
     --main-vertical-padding: 1.5rem;
@@ -40,6 +44,14 @@
     --select-text-horizontal-buffer: 0.75rem;
     --td-text-vertical-buffer: 1.0rem;
     --td-text-horizontal-buffer: 1.0rem;
+    --team-players-vertical-buffer: 1.0rem;
+    --team-players-horizontal-buffer: 1.25rem;
+    --team-schedule-vertical-buffer: 0.9rem;
+    --team-schedule-horizontal-buffer: 1.0rem;
+    --team-schedule-gap: 1.5rem;
+    --team-stats-vertical-buffer: 1.0rem;
+    --team-stats-horizontal-buffer: 1.25rem;
+    --team-stats-gap: 1.0rem;
     --select-arrow-image-size: 0.75rem;
     --select-arrow-image-buffer: 0.75rem;
     --standings-team-border-thickness: 0.5rem;
@@ -59,6 +71,13 @@
     --nav-buttons-horizontal-padding: 3.0rem;
     --nav-buttons-gap: 0.25rem;
     --nav-underline-width: 0.1875rem;
+    --team-summary-divider-padding: 0.5rem;
+    --team-grid-gap: 1.25rem;
+    --team-grid-left-min-width: 16.0rem;
+    --team-grid-right-min-width: 24.0rem;
+
+    --team-grid-left-ratio: 0.4fr;
+    --team-grid-right-ratio: 0.6fr;
 }
 
 html {
@@ -142,7 +161,7 @@ a:hover {
 }
 
 button {
-    padding: var(--container-text-vertical-buffer) var(--container-text-vertical-buffer);
+    padding: var(--container-text-vertical-buffer) var(--container-text-horizontal-buffer);
     background: none;
     font-size: var(--main-font-size);
     border: var(--divider-width) solid var(--divider-color);
@@ -153,14 +172,12 @@ button {
 select {
     appearance: none;
     -webkit-appearance: none;
-
     padding: var(--select-text-vertical-buffer) calc(var(--select-text-horizontal-buffer) + var(--select-arrow-image-size) + var(--select-arrow-image-buffer)) var(--select-text-vertical-buffer) var(--select-text-horizontal-buffer);
     background-color: var(--secondary-color);
     font-size: var(--small-font-size);
     border: var(--divider-width) solid var(--divider-color);
     border-radius: var(--select-border-radius);
     cursor: pointer;
-
     background-image: url("Images/select-arrow.svg");
     background-size: var(--select-arrow-image-size);
     background-repeat: no-repeat;
@@ -288,7 +305,13 @@ h2 {
 }
 
 .forfeit {
-    color: var(--forfeit-color);
+    color: var(--forfeit-cancel-color);
+}
+
+.match-cancel {
+    color: var(--forfeit-cancel-color);
+    font-size: var(--small-font-size);
+    font-style: italic;
 }
 
 .match-incomplete {
@@ -297,7 +320,7 @@ h2 {
 }
 
 .tiebreaker-main h4 {
-    margin-bottom: 0.25rem;
+    margin-bottom: var(--tiebreaker-margin);
 }
 
 .tiebreaker-main ul, .tiebreaker-main ol {
@@ -308,6 +331,246 @@ h2 {
 .tiebreaker-footnote {
     font-size: var(--small-font-size);
     font-style: italic;
+}
+
+.team-header {
+    margin-bottom: var(--page-header-padding);
+}
+
+.team-header h2 {
+    margin-bottom: var(--team-summary-padding);
+}
+
+.team-summary {
+    display: flex;
+    gap: 0;
+}
+
+.team-summary span:not(:last-child)::after {
+    content: var(--team-summary-divider);
+    margin: 0 var(--team-summary-divider-padding);
+    color: var(--divider-color);
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns:
+        minmax(var(--team-grid-left-min-width), var(--team-grid-left-ratio))
+        minmax(var(--team-grid-right-min-width), var(--team-grid-right-ratio))
+    ;
+    grid-template-areas:
+        "schedule players"
+        "schedule stats"
+    ;
+    gap: var(--team-grid-gap);
+    align-items: start;
+}
+
+/*this is the width threshold for the team grid to change layout*/
+@media (max-width: 50.0rem) {
+    .team-grid {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "players"
+            "schedule"
+            "stats"
+        ;
+    }
+}
+
+.schedule-card {
+    grid-area: schedule;
+}
+
+.players-card {
+    grid-area: players;
+}
+
+.stats-card {
+    grid-area: stats;
+}
+
+.team-card {
+    position: relative;
+    overflow: hidden;
+    background-color: var(--secondary-color);
+    border: var(--content-card-border-width) solid var(--secondary-color);
+    border-top: none;
+    border-radius: var(--content-card-border-radius);
+}
+
+.team-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--content-card-border-width);
+    background-color: var(--team-color);
+}
+
+.team-card-header {
+    margin: 0;
+    padding: var(--container-text-vertical-buffer) var(--container-text-horizontal-buffer);
+    background-color: var(--secondary-color);
+    text-transform: uppercase;
+    color: var(--faded-text-color);
+    font-size: var(--small-font-size);
+    font-weight: bold;
+    border-bottom: var(--divider-width) solid var(--divider-color);
+}
+
+/*the player grid has two columns of equal size*/
+.player-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.player-grid > div {
+    padding: var(--team-players-vertical-buffer) var(--team-players-horizontal-buffer);
+    border-bottom: var(--divider-width) solid var(--divider-color);
+}
+
+/*this algorithm targets "odd rows"*/
+.player-grid > div:nth-child(4n + 1), .player-grid > div:nth-child(4n + 2) {
+    background-color: var(--table-odd-color);
+}
+
+/*this algorithm targets "even rows"*/
+.player-grid > div:nth-child(4n + 3), .player-grid > div:nth-child(4n) {
+    background-color: var(--table-even-color);
+}
+
+.player-grid > div:nth-child(odd) {
+    border-right: var(--divider-width) solid var(--divider-color);
+}
+
+/*this algorithm removes the column divider on the last row if there are an odd number of players*/
+.player-grid > div:nth-last-child(2):has(+ .empty-player-cell) {
+    border-right: none;
+}
+
+/*this algorithm removes the row divider under the last row*/
+.player-grid > div:nth-last-child(-n + 2) {
+    border-bottom: none;
+}
+
+.team-schedule .row {
+    display: grid;
+    grid-template-columns:
+        auto
+        minmax(0, 1fr)
+        auto
+    ;
+    align-items: center;
+    gap: var(--team-schedule-gap);
+    padding: var(--team-schedule-vertical-buffer) var(--team-schedule-horizontal-buffer);
+    border-top: var(--divider-width) solid var(--divider-color);
+}
+
+.team-schedule .row:first-child {
+    border-top: none;
+}
+
+.team-schedule .row:nth-child(even) {
+    background-color: var(--table-even-color);
+}
+
+.team-schedule .row:nth-child(odd) {
+    background-color: var(--table-odd-color);
+}
+
+.team-schedule .week {
+    color: var(--faded-text-color);
+    font-size: var(--small-font-size);
+}
+
+.team-schedule .result {
+    white-space: nowrap;
+}
+
+.team-schedule .result-W {
+    color: var(--team-W-color);
+    font-weight: bold;
+}
+
+.team-schedule .result-L {
+    color: var(--team-L-color);
+    font-weight: bold;
+}
+
+.team-schedule .result-T {
+    color: var(--team-T-color);
+    font-weight: bold;
+}
+
+.team-schedule .result-TBD {
+    color: var(--faded-text-color);
+    font-style: italic;
+}
+
+.team-schedule .result-cancel {
+    font-size: var(--small-font-size);
+    color: var(--forfeit-cancel-color);
+    font-style: italic;
+}
+
+/*the stats grid has four rows of equal size*/
+.stats-grid {
+    display: grid;
+    grid-template-rows: repeat(4, auto);
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+}
+
+.stats-grid > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--team-stats-gap);
+    padding: var(--team-stats-vertical-buffer) var(--team-stats-horizontal-buffer);
+}
+
+/*this algorithm creates a column divider*/
+.stats-grid > div:nth-child(-n + 4) {
+    border-right: var(--divider-width) solid var(--divider-color);
+}
+
+/*this algorithm creates a row divider for all but the last row*/
+.stats-grid > div:not(:nth-child(4n + 1))  {
+    border-top: var(--divider-width) solid var(--divider-color);
+}
+
+/*this algorithm targets "even rows"*/
+.stats-grid > div:nth-child(4n), .stats-grid > div:nth-child(4n + 2) {
+    background-color: var(--table-even-color);
+}
+/*this algorithm targets "odd rows"*/
+.stats-grid > div:nth-child(4n + 1), .stats-grid > div:nth-child(4n + 3) {
+    background-color: var(--table-odd-color);
+}
+
+.stat-label {
+    color: var(--faded-text-color);
+    font-size: var(--small-font-size);
+}
+
+.stat-value-rank {
+    white-space: nowrap;
+}
+
+.stat-value-neutral {
+    font-weight: bold;
+}
+
+.stat-value-positive {
+    color: var(--positive-net-color);
+    font-weight: bold;
+}
+
+.stat-value-negative {
+    color: var(--negative-net-color);
+    font-weight: bold;
 }
 
 #header, #nav-buttons{
@@ -349,272 +612,4 @@ h2 {
     border-bottom: var(--nav-underline-width) solid var(--underline-color);
     color: var(--active-text-color);
     font-weight: bold;
-}
-
-/*(still need to refine/consolidate)*/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-/**/
-
-.team-header {
-    margin-bottom: var(--page-header-padding);
-}
-
-.team-header h2 {
-    margin-bottom: var(--team-summary-padding);
-}
-
-.team-summary {
-    display: flex;
-    gap: 0;
-}
-
-.team-summary span:not(:last-child)::after {
-    content: " | ";
-    margin: 0 0.5rem;
-    color: var(--divider-color);
-}
-
-.team-grid {
-    display: grid;
-
-    grid-template-columns:
-        minmax(16rem, 1.2fr)
-        minmax(24rem, 1.8fr);
-
-    grid-template-areas:
-        "schedule players"
-        "schedule stats";
-
-    gap: 1.25rem;
-    align-items: start;
-}
-
-.schedule-card {
-    grid-area: schedule;
-}
-
-.players-card {
-    grid-area: players;
-}
-
-.stats-card {
-    grid-area: stats;
-}
-
-.team-card {
-    position: relative;
-    overflow: hidden;
-
-    background-color: var(--secondary-color);
-
-    border: var(--content-card-border-width) solid var(--secondary-color);
-    border-top: none;
-
-    border-radius: var(--content-card-border-radius);
-}
-
-.team-card::before {
-    content: "";
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-
-    height: var(--content-card-border-width);
-
-    background-color: var(--team-color);
-}
-
-.team-card-header {
-    margin: 0;
-    padding: var(--container-text-vertical-buffer) var(--container-text-horizontal-buffer);
-    background-color: var(--secondary-color);
-    text-transform: uppercase;
-    color: var(--faded-text-color);
-    font-size: var(--small-font-size);
-    font-weight: bold;
-    border-bottom: var(--divider-width) solid var(--divider-color);
-}
-
-/* Players */
-
-.player-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-auto-columns: 1fr;
-}
-
-.player-grid > div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    gap: 1rem;
-    padding: 1rem 1.25rem;
-
-    border-bottom: var(--divider-width) solid var(--divider-color);
-}
-
-.player-grid > div:nth-child(4n + 3), .player-grid > div:nth-child(4n) {
-    background-color: var(--table-even-color);
-}
-
-.player-grid > div:nth-child(4n + 1), .player-grid > div:nth-child(4n + 2) {
-    background-color: var(--table-odd-color);
-}
-
-.player-grid > div:nth-child(odd) {
-    border-right: var(--divider-width) solid var(--divider-color);
-}
-
-.player-grid > div:nth-last-child(2):has(+ .empty-player-cell) {
-    border-right: none;
-}
-
-.player-grid > div:nth-last-child(-n + 2) {
-    border-bottom: none;
-}
-
-/* Schedule */
-
-.team-schedule .row {
-    display: grid;
-
-    grid-template-columns:
-        auto
-        minmax(0, 1fr)
-        auto;
-
-    align-items: center;
-
-    gap: 1.5rem;
-
-    padding: 0.9rem 1rem;
-
-    border-top: var(--divider-width) solid var(--divider-color);
-}
-
-.team-schedule .row:first-child {
-    border-top: none;
-}
-
-.team-schedule .row:nth-child(even) {
-    background-color: var(--table-even-color);
-}
-
-.team-schedule .row:nth-child(odd) {
-    background-color: var(--table-odd-color);
-}
-
-.team-schedule .week {
-    color: var(--faded-text-color);
-    font-size: var(--small-font-size);
-}
-
-.team-schedule .result {
-    white-space: nowrap;
-}
-
-.team-schedule .result-W {
-    color: var(--team-W-color);
-    font-weight: bold;
-}
-
-.team-schedule .result-L {
-    color: var(--team-L-color);
-    font-weight: bold;
-}
-
-.team-schedule .result-T {
-    color: var(--team-T-color);
-    font-weight: bold;
-}
-
-/* Statistics */
-
-.stats-grid {
-    display: grid;
-    grid-template-rows: repeat(4, auto);
-    grid-auto-flow: column;
-    grid-auto-columns: 1fr;
-}
-
-.stats-grid > div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    gap: 1rem;
-
-    padding: 1rem 1.25rem;
-}
-
-.stats-grid > div:nth-child(-n + 4) {
-    border-right: var(--divider-width) solid var(--divider-color);
-}
-
-.stats-grid > div:not(:nth-child(4n + 1))  {
-    border-top: var(--divider-width) solid var(--divider-color);
-}
-
-.stats-grid > div:nth-child(4n), .stats-grid > div:nth-child(4n + 2) {
-    background-color: var(--table-even-color);
-}
-.stats-grid > div:nth-child(4n + 1), .stats-grid > div:nth-child(4n + 3) {
-    background-color: var(--table-odd-color);
-}
-
-.stat-label {
-    color: var(--faded-text-color);
-    font-size: var(--small-font-size);
-}
-
-.stat-value-rank {
-    white-space: nowrap;
-}
-
-.stat-value-neutral {
-    font-weight: bold;
-}
-
-.stat-value-positive {
-    color: var(--positive-net-color);
-    font-weight: bold;
-}
-
-.stat-value-negative {
-    color: var(--negative-net-color);
-    font-weight: bold;
-}
-
-/* Mobile */
-
-@media (max-width: 50rem) {
-    .team-grid {
-        grid-template-columns: 1fr;
-
-        grid-template-areas:
-            "players"
-            "schedule"
-            "stats";
-    }
-
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .stats-grid > div {
-        border-right: none;
-    }
-
-    .stats-grid > div:nth-child(2) {
-        border-top: var(--divider-width) solid var(--divider-color);
-    }
 }

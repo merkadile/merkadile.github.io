@@ -21,12 +21,14 @@ class Team {
         this.scoreAgainst = 0;
 
         for (const match of league.matches) {
-            if (match.week !== "Playoffs" && (
-                match.team1ID === this.id || match.team2ID === this.id
-            )) {
+            if (
+                match.week !== "Playoffs"
+                &&
+                (match.team1ID === this.id || match.team2ID === this.id)
+            ) {
                 this.schedule.push(match);
 
-                if (match.isComplete()) {
+                if (match.isComplete() && !(match.cancel)) {
                     if (match.winnerID == this.id) this.wins++;
                     else if (match.winnerID == null) this.ties++;
                     else this.losses++;

@@ -5,6 +5,7 @@ class Match {
         this.team2ID = data.team2ID;
         this.week = data.week;
         this.forfeit = data.forfeit;
+        this.cancel = data.cancel;
 
         this.games = [];
         for (const gameData of data.games)
@@ -12,22 +13,6 @@ class Match {
         ;
 
         this.calculateResults();
-    }
-
-    isComplete() {
-        return (
-            (
-                this.games.length > 0
-                &&
-                !(this.week === "Playoffs" && this.winner === null)
-            )
-            ||
-            (
-                this.week !== "Playoffs"
-                &&
-                this.forfeit !== null
-            )
-        );
     }
 
     calculateResults() {
@@ -49,6 +34,9 @@ class Match {
             if (this.team1GameWins > this.team2GameWins) this.winner = 1;
             else if (this.team2GameWins > this.team1GameWins) this.winner = 2;
             else this.winner = null;
+
+            if (this.forfeit === 1) this.winner = 2;
+            else if (this.forfeit === 2) this.winner = 1;
         }
         else {
             if (this.team1GameWins > this.team2GameWins) this.winnerID = this.team1ID;
@@ -58,5 +46,25 @@ class Match {
             if (this.forfeit === 1) this.winnerID = this.team2ID;
             else if (this.forfeit === 2) this.winnerID = this.team1ID;
         }
+    }
+
+    isComplete() {
+        return (
+            (
+                this.games.length > 0
+                &&
+                !(this.week === "Playoffs" && this.winner === null)
+            )
+            ||
+            (
+                this.forfeit !== null
+            )
+            ||
+            (
+                this.week !== "Playoffs"
+                &&
+                this.cancel
+            )
+        );
     }
 }
