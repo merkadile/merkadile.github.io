@@ -566,7 +566,9 @@ function findPlayoffTeam(league, teamSlot) {
 }
 
 async function main() {
-    const collectiveInfoResponse = await fetch("Collective Info.json");
+    const collectiveInfoResponse = await fetch(
+        "Collective Info.json", {cache: "no-store"}
+    );
     const collectiveInfoData = await collectiveInfoResponse.json();
     const leagueName = collectiveInfoData.leagueName;
     const seasonNames = collectiveInfoData.seasonNames;
@@ -602,7 +604,9 @@ async function main() {
         return;
     }
 
-    const leagueDataResponse = await fetch(`Seasons/${season}.json`);
+    const leagueDataResponse = await fetch(
+        `Seasons/${season}.json`, {cache: "no-store"}
+    );
     const leagueData = await leagueDataResponse.json();
     const league = new League(leagueData);
 
