@@ -327,7 +327,22 @@
             "forfeit": null,
             "cancel": false,
             "games": [
-                
+                {
+                    "team1Score": 0,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 5
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 14
+                },
+                {
+                    "team1Score": 14,
+                    "team2Score": 21
+                }
             ]
         },
         {
@@ -338,7 +353,26 @@
             "forfeit": null,
             "cancel": false,
             "games": [
-                
+                {
+                    "team1Score": 11,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 6
+                },
+                {
+                    "team1Score": 3,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 2,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 3,
+                    "team2Score": 21
+                }
             ]
         },
         {
@@ -463,7 +497,7 @@
         ],
         "matchDates": [
             {
-                "date": "2026-10-31T17:00:00.000Z",
+                "date": "2026-11-01T18:00:00.000Z",
                 "location": "Location TBD"
             }
         ],
