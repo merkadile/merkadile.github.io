@@ -475,15 +475,150 @@ function displayMatch(league, season, matchID) {
         `;
     }
 
-    if (team1 === null || team2 === null || !(match.isComplete())) {
-        //TODO: display card with match time/date/location
+    if (team1 === null || team2 === null || !(match.isComplete())) html += `
+        <div class="match-page">
+            <h3 class="match-result-TBD">
+                Match Result TBD
+            </h3>
+    `;
+    else if (match.cancel) html += `
+        <div class="match-page">
+            <h3 class="match-cancelled">
+                Match Cancelled
+            </h3>
+    `;
+    else {
+        let team1Result = "tie";
+        let team2Result = "tie";
+        if (match.week === "Playoffs") {
+            if (match.winner === 1) {
+                team1Result = "win";
+                team2Result = "loss";
+            }
+            else if (match.winner === 2) {
+                team1Result = "loss";
+                team2Result = "win";
+            }
+        }
+        else {
+            if (match.winnerID === match.team1ID) {
+                team1Result = "win";
+                team2Result = "loss";
+            }
+            else if (match.winnerID === match.team2ID) {
+                team1Result = "loss";
+                team2Result = "win";
+            }
+        }
+
+        let team1Forfeit = "";
+        let team2Forfeit = "";
+        if (match.forfeit === 1) {
+            team1Forfeit = " (by forfeit)";
+            team2Forfeit = " (by opponent forfeit)";
+        }
+        else if (match.forfeit === 2) {
+            team1Forfeit = " (by opponent forfeit)";
+            team2Forfeit = " (by forfeit)";
+        }
+
+        html += `
+            <div class="match-page" style="
+                --team-1-color: ${team1.color};
+                --team-2-color: ${team2.color};
+            ">
+                <div class="match-team-headings">
+                    <h3 class="match-team-1-heading match-${team1Result}-team">
+                        <a href="?season=${season}&page=team&id=${team1.id}">
+                            ${team1.name} (${team1.acronym})
+                        </a>
+                    </h3>
+                    <h3 class="match-team-2-heading match-${team2Result}-team">
+                        <a href="?season=${season}&page=team&id=${team2.id}">
+                            ${team2.name} (${team2.acronym})
+                        </a>
+                    </h3>
+                    <div class="match-team-1-result match-${team1Result}">match ${team1Result}
+                        <span>${team1Forfeit}</span>
+                    </div>
+                    <div class="match-team-2-result match-${team2Result}">match ${team2Result}
+                        <span>${team2Forfeit}</span>
+                    </div>
+                </div>
+                <div class="games-list">
+        `;
+
+        for (let i = 0; i < match.games.length; i++) {
+            let game = match.games[i];
+            let gameNumber = i + 1;
+
+            let alignment, team1ScoreRowResult, team2ScoreRowResult;
+            if (game.winner() === 1) {
+                alignment = "left";
+                team1ScoreRowResult = " winner";
+                team2ScoreRowResult = "";
+            }
+            else {
+                alignment = "right";
+                team1ScoreRowResult = "";
+                team2ScoreRowResult = " winner";
+            }
+
+            html += `
+                <div class="game-row ${alignment}">
+                    <article class="game-card team-${game.winner()}-game-win">
+                        <div class="game-number">Game ${gameNumber}</div>
+                        <div class="game-scores">
+                            <div class="game-score-row${team1ScoreRowResult}">
+                                <span>${team1.acronym}</span>
+                                <span>${game.team1Score}</span>
+                            </div>
+                            <div class="game-score-row${team2ScoreRowResult}">
+                                <span>${team2.acronym}</span>
+                                <span>${game.team2Score}</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            `;
+        }
+
+        html += `
+                </div>
+            </div>
+        `;
+    }
+
+    let dateTimeString, locationString;
+    if (match.week === "Playoffs") {
+        const playoffMatchStructure = league.getPlayoffMatchStructure(matchID);
+
+        dateTimeString = formatDateTime(new Date(league.playoffs.matchDates[
+            playoffMatchStructure.roundIndex
+        ].date));
+        locationString = league.playoffs.matchDates[
+            playoffMatchStructure.roundIndex
+        ].location;
     }
     else {
-        //TODO: display detailed match results
+        dateTimeString = formatDateTime(new Date(league.matchDates[
+            match.week - 1
+        ].date));
+        locationString = league.matchDates[
+            match.week - 1
+        ].location;
     }
 
     html += `
-        <p>This page is still in development... stay tuned!</p>
+        <div class="match-info-card">
+            <div class="header">Match Info</div>
+            <div class="match-info">
+                <span class="title">Date/Time of Match</span>
+                <span class="info">${dateTimeString}</span>
+                <span class="title">Location of Match</span>
+                <span class="info">${locationString}</span>
+            </div>
+        </div>
     `;
     
     return html;
@@ -698,5 +833,4 @@ async function main() {
 main();
 
 //  remaining things to do:
-//      1. match pages (make sure to account for forfeit or cancel possibility [in the case that there's both cancel and forfeit selected, cancel should be displayed because that's what gets recorded internally])
-//      2. playoff page implementation (podium, bracket visuals, and playoff chances [make sure to display forfeits properly])
+//      1. playoff page implementation (podium and bracket visuals [make sure to display forfeits properly])

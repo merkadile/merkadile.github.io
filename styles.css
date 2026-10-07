@@ -75,9 +75,17 @@
     --team-grid-gap: 1.25rem;
     --team-grid-left-min-width: 16.0rem;
     --team-grid-right-min-width: 24.0rem;
+    --match-headings-outside-padding: 0.75rem;
+    --match-grid-gap: 1.25rem;
+    --games-padding-top: 1.0rem;
+    --games-padding-bottom: 2.5rem;
+    --games-gap: 1.25rem;
+    --match-info-row-gap: 0.75rem;
+    --match-info-column-gap: 1.5rem;
 
     --team-grid-left-ratio: 0.4fr;
     --team-grid-right-ratio: 0.6fr;
+    --game-width-ratio: 50%;
 }
 
 html {
@@ -570,6 +578,205 @@ h2 {
 
 .stat-value-negative {
     color: var(--negative-net-color);
+    font-weight: bold;
+}
+
+.match-page {
+    width: 100%;
+    max-width: var(--max-table-width);
+}
+
+.match-team-headings {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 0;
+    column-gap: var(--match-grid-gap);
+}
+
+.match-team-1-heading {
+    text-align: left;
+    align-content: center;
+    margin: 0;
+    padding-left: var(--match-headings-outside-padding);
+    border-left: var(--result-team-border-thickness) solid;
+}
+
+.match-team-2-heading {
+    text-align: right;
+    align-content: center;
+    margin: 0;
+    padding-right: var(--match-headings-outside-padding);
+    border-right: var(--result-team-border-thickness) solid;
+}
+
+.match-win-team.match-team-1-heading {
+    border-color: var(--team-1-color);
+}
+
+.match-win-team.match-team-2-heading {
+    border-color: var(--team-2-color);
+}
+
+.match-tie-team {
+    border-color: var(--tie-text-color);
+}
+
+.match-loss-team {
+    color: var(--faded-text-color);
+    border-color: var(--faded-text-color);
+}
+
+.match-team-1-result {
+    text-align: left;
+    margin: 0;
+    padding-left: var(--match-headings-outside-padding);
+    border-left: var(--result-team-border-thickness) solid transparent;
+}
+
+.match-team-2-result {
+    text-align: right;
+    margin: 0;
+    padding-right: var(--match-headings-outside-padding);
+    border-right: var(--result-team-border-thickness) solid transparent;
+}
+
+.match-win {
+    color: var(--team-W-color);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.match-tie {
+    color: var(--team-T-color);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.match-loss {
+    color: var(--team-L-color);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.match-win span, .match-tie span, .match-loss span {
+    color: var(--main-text-color);
+}
+
+.games-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--games-gap);
+    padding-top: var(--games-padding-top);
+    padding-bottom: var(--games-padding-bottom);
+}
+
+.game-row {
+    display: flex;
+    width: 100%;
+}
+
+.game-row.left {
+    justify-content: flex-start;
+}
+
+.game-row.right {
+    justify-content: flex-end;
+}
+
+.game-card {
+    position: relative;
+    width: calc(var(--game-width-ratio) - (var(--games-gap) / 2));
+    background-color: var(--secondary-color);
+    border: var(--content-card-border-width) solid var(--secondary-color);
+    border-top: none;
+    border-radius: var(--content-card-border-radius);
+    overflow: hidden;
+}
+
+.team-1-game-win {
+    --game-winner-color: var(--team-1-color);
+}
+
+.team-2-game-win {
+    --game-winner-color: var(--team-2-color);
+}
+
+.game-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--content-card-border-width);
+    background-color: var(--game-winner-color);
+}
+
+.game-number {
+    padding: var(--container-text-vertical-buffer) var(--container-text-horizontal-buffer);
+    border-bottom: var(--divider-width) solid var(--divider-color);
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--faded-text-color);
+    font-size: var(--small-font-size);
+}
+
+.game-scores {
+    padding: var(--container-text-vertical-buffer) var(--container-text-horizontal-buffer);
+    background-color: var(--table-odd-color);
+}
+
+.game-score-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.game-score-row.winner {
+    font-weight: bold;
+}
+
+.match-result-TBD, .match-cancelled {
+    text-align: center;
+}
+
+.match-cancelled {
+    color: var(--forfeit-cancel-color);
+}
+
+.match-info-card {
+    background-color: var(--secondary-color);
+    border: var(--content-card-border-width) solid var(--secondary-color);
+    border-radius: var(--content-card-border-radius);
+}
+
+.match-info-card .header {
+    padding: var(--container-text-vertical-buffer) var(--container-text-horizontal-buffer);
+    border-bottom: var(--divider-width) solid var(--divider-color);
+    text-transform: uppercase;
+    font-weight: bold;
+    color: var(--faded-text-color);
+    font-size: var(--small-font-size);
+}
+
+.match-info {
+    display: grid;
+    grid-template-columns:
+        max-content
+        1fr
+    ;
+    align-items: center;
+    row-gap: var(--match-info-row-gap);
+    column-gap: var(--match-info-column-gap);
+    padding: var(--container-text-vertical-buffer) var(--container-text-horizontal-buffer);
+    background-color: var(--table-odd-color);
+}
+
+.match-info .title {
+    font-size: var(--small-font-size);
+    color: var(--faded-text-color);
+}
+
+.match-info .info {
     font-weight: bold;
 }
 
