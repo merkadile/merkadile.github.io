@@ -222,6 +222,14 @@ function displayPlayoffs(league, season) {
         <h2>Playoffs</h2>
     `;
 
+    if (league.playoffsComplete()) {
+        //TODO: display podium
+    }
+
+    if (league.regularSeasonComplete()) {
+        //TODO: bracket visuals [make sure to display forfeits properly]
+    }
+
     html += `
         <span class="playoff-rules">
             <h3>Playoff Rules:</h3>
@@ -831,6 +839,3 @@ async function main() {
 }
 
 main();
-
-//  remaining things to do:
-//      1. playoff page implementation (podium and bracket visuals [make sure to display forfeits properly])

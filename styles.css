@@ -683,6 +683,14 @@ h2 {
     justify-content: flex-end;
 }
 
+.team-1-game-win {
+    --game-winner-color: var(--team-1-color);
+}
+
+.team-2-game-win {
+    --game-winner-color: var(--team-2-color);
+}
+
 .game-card {
     position: relative;
     width: calc(var(--game-width-ratio) - (var(--games-gap) / 2));
@@ -691,14 +699,6 @@ h2 {
     border-top: none;
     border-radius: var(--content-card-border-radius);
     overflow: hidden;
-}
-
-.team-1-game-win {
-    --game-winner-color: var(--team-1-color);
-}
-
-.team-2-game-win {
-    --game-winner-color: var(--team-2-color);
 }
 
 .game-card::before {
