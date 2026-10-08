@@ -383,7 +383,30 @@
             "forfeit": null,
             "cancel": false,
             "games": [
-                
+                {
+                    "team1Score": 11,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 19
+                },
+                {
+                    "team1Score": 5,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 7,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 0,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 15,
+                    "team2Score": 21
+                }
             ]
         },
         {
@@ -394,7 +417,26 @@
             "forfeit": null,
             "cancel": false,
             "games": [
-                
+                {
+                    "team1Score": 2,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 12
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 5
+                },
+                {
+                    "team1Score": 4,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 16,
+                    "team2Score": 21
+                }
             ]
         },
         {
