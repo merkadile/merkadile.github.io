@@ -82,10 +82,36 @@
     --games-gap: 1.25rem;
     --match-info-row-gap: 0.75rem;
     --match-info-column-gap: 1.5rem;
+    --playoff-round-column-width: 18.0rem;
+    --playoff-bracket-outside-margin: 1.75rem;
+    --playoff-bracket-inside-margin: 1.0rem;
+    --playoff-bracket-gap: 1.25rem;
+    --playoff-round-header-margin: 1.0rem;
+    --playoff-matchup-vertical-padding: 0.75rem;
+    --playoff-matchup-horizontal-padding: 0.5rem;
+    --playoff-match-result-padding: 0.75rem;
+    --first-podium-min-height: 16.0rem;
+    --second-podium-min-height: 12.0rem;
+    --third-podium-min-height: 10.0rem;
+    --podium-card-max-width: 20.0rem;
+    --podium-margin-bottom: 2.5rem;
+    --podium-gap: 1.0rem;
+    --podium-card-text-padding-top: 2.75rem;
+    --podium-card-text-padding-bottom: 1.5rem;
+    --podium-card-text-padding-sides: 1.0rem;
+    --podium-card-text-gap: 0.75rem;
+    --podium-card-players-gap: 0.4rem;
+    --podium-medal-font-size: 4.0rem;
+    --podium-other-place-font-size: 1.25rem;
+    --podium-other-padding-vertical: 0.75rem;
+    --podium-other-padding-horizontal: 1.25rem;
+    --podium-other-text-gap: 1.0rem;
 
     --team-grid-left-ratio: 0.4fr;
     --team-grid-right-ratio: 0.6fr;
     --game-width-ratio: 50%;
+    --second-place-medal-size-ratio: 0.9;
+    --third-place-medal-size-ratio: 0.8;
 }
 
 html {
@@ -252,6 +278,10 @@ h2 {
     margin-top: 0;
 }
 
+.schedule-info p {
+    font-weight: bold;
+}
+
 .match-result {
     white-space: nowrap;
 }
@@ -266,12 +296,12 @@ h2 {
     border-left: var(--result-team-border-thickness) solid;
 }
 
-.result-team-1 .acronym{
+.result-team-1 .acronym {
     width: var(--result-acronym-width);
     text-align: right;
 }
 
-.result-team-1 .game-wins{
+.result-team-1 .game-wins {
     width: var(--result-game-wins-width);
     text-align: right;
 }
@@ -282,12 +312,12 @@ h2 {
     border-right: var(--result-team-border-thickness) solid;
 }
 
-.result-team-2 .acronym{
+.result-team-2 .acronym {
     width: var(--result-acronym-width);
     text-align: left;
 }
 
-.result-team-2 .game-wins{
+.result-team-2 .game-wins {
     width: var(--result-game-wins-width);
     text-align: left;
 }
@@ -777,6 +807,227 @@ h2 {
 }
 
 .match-info .info {
+    font-weight: bold;
+}
+
+.playoff-bracket {
+    margin-bottom: var(--playoff-bracket-outside-margin);
+}
+
+.playoff-bracket > h3, .playoff-round-info > h3 {
+    margin-bottom: 0;
+}
+
+.bracket-rounds, .round-info-grid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: var(--playoff-round-column-width);
+    width: max-content;
+    min-width: 100%;
+    align-items: stretch;
+}
+
+.bracket-round {
+    min-width: 0;
+    min-height: 100%;
+    padding: 0 var(--playoff-bracket-gap);
+    border-right: var(--divider-width) solid var(--divider-color);
+}
+
+.bracket-round:last-child {
+    border-right: none;
+}
+
+.bracket-round h4 {
+    margin-bottom: var(--playoff-round-header-margin);
+    text-align: center;
+}
+
+.bracket-round > :first-child {
+    margin-top: var(--playoff-bracket-inside-margin);
+}
+
+.playoff-match {
+    margin-bottom: var(--playoff-bracket-gap);
+    background-color: var(--secondary-color);
+    border: var(--content-card-border-width) solid var(--secondary-color);
+    border-radius: var(--content-card-border-radius);
+}
+
+.playoff-match .matchup {
+    padding: var(--playoff-matchup-vertical-padding) var(--playoff-matchup-horizontal-padding);
+    font-size: var(--small-font-size);
+}
+
+.playoff-match .match-result {
+    display: flex;
+    justify-content: center;
+    padding: var(--playoff-match-result-padding) 0;
+    background-color: var(--table-odd-color);
+    border-top: var(--divider-width) solid var(--divider-color);
+}
+
+.round-info {
+    min-width: 0;
+    padding: 0 calc(var(--playoff-bracket-gap) / 2);
+    border-right: var(--divider-width) solid var(--divider-color);
+}
+
+.round-info:last-child {
+    border-right: none;
+}
+
+.round-info h4 {
+    margin-top: var(--playoff-bracket-inside-margin);
+    margin-bottom: var(--playoff-round-header-margin);
+    text-align: center;
+}
+
+.round-info p {
+    font-size: var(--small-font-size);
+    font-weight: bold;
+}
+
+.standings-podium {
+    width: 100%;
+    max-width: var(--max-table-width);
+    margin-bottom: var(--podium-margin-bottom);
+}
+
+.podium-grid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, var(--podium-card-max-width));
+    justify-content: center;
+    align-items: end;
+    gap: var(--podium-gap);
+}
+
+.podium-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+    padding: var(--podium-card-text-padding-top) var(--podium-card-text-padding-sides) var(--podium-card-text-padding-bottom);
+    text-align: center;
+    background-color: var(--secondary-color);
+    border: var(--content-card-border-width) solid var(--secondary-color);
+    border-top: none;
+    border-radius: var(--content-card-border-radius);
+}
+
+.podium-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--content-card-border-width);
+    background-color: var(--team-color);
+    border-radius:
+        var(--content-card-border-radius)
+        var(--content-card-border-radius)
+        0
+        0
+    ;
+}
+
+.podium-card-first {
+    min-height: var(--first-podium-min-height);
+}
+
+.podium-card-second {
+    min-height: var(--second-podium-min-height);
+}
+
+.podium-card-third {
+    min-height: var(--third-podium-min-height);
+}
+
+.podium-medal {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: grid;
+    place-items: center;
+    line-height: 0;
+}
+
+.podium-card-first .podium-medal {
+    font-size: var(--podium-medal-font-size);
+}
+
+.podium-card-second .podium-medal {
+    font-size: calc(
+        var(--podium-medal-font-size)
+        *
+        var(--second-place-medal-size-ratio)
+    );
+}
+
+.podium-card-third .podium-medal {
+    font-size: calc(
+        var(--podium-medal-font-size)
+        *
+        var(--third-place-medal-size-ratio)
+    );
+}
+
+.podium-place {
+    margin-bottom: var(--podium-card-text-gap);
+    color: var(--faded-text-color);
+    font-size: var(--small-font-size);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.podium-team-name {
+    margin: 0;
+}
+
+.podium-players {
+    display: flex;
+    flex-direction: column;
+    gap: var(--podium-card-players-gap);
+    margin-top: var(--podium-card-text-gap);
+    font-size: var(--small-font-size);
+}
+
+.podium-other {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: var(--podium-other-text-gap);
+    margin-top: var(--podium-gap);
+    padding: var(--podium-other-padding-vertical) var(--podium-other-padding-horizontal);
+    background: var(--secondary-color);
+    border: var(--content-card-border-width) solid var(--secondary-color);
+    border-left: none;
+    border-radius: var(--content-card-border-radius);
+}
+
+.podium-other::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: var(--content-card-border-width);
+    background-color: var(--team-color);
+    border-radius:
+        var(--content-card-border-radius)
+        0
+        0
+        var(--content-card-border-radius)
+    ;
+}
+
+.podium-other-place {
+    color: var(--faded-text-color);
+    font-size: var(--podium-other-place-font-size);
     font-weight: bold;
 }
 

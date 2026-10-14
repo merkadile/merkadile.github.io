@@ -119,8 +119,10 @@ function displaySchedule(league, season, week) {
 
     html += `
         </select>
-        <h4>${dateTimeString}</h4>
-        <h4>${locationString}</h4>
+        <span class="schedule-info">
+            <p>${dateTimeString}</p>
+            <p>${locationString}</p>
+        </span>
         <table>
             <thead>
                 <tr>
@@ -141,67 +143,7 @@ function displaySchedule(league, season, week) {
                     <td class="left-align"><a href="?season=${season}&page=match&id=${match.id}">
                         ${team1.name} (${team1.acronym}) vs. ${team2.name} (${team2.acronym})
                     </a></td>
-                    <td class="left-align match-result">
-            `;
-
-            if (match.cancel) html += `<span class="match-cancel">Cancelled</span>`;
-            else if (match.isComplete()) {
-                if (match.winnerID === team1.id) html += `
-                    <span class="result-team-1 match-winner" style="--team-color: ${team1.color};">
-                `;
-                else if (match.winnerID === team2.id) html += `
-                    <span class="result-team-1 match-loser" style="--team-color: ${team1.color};">
-                `;
-                else html += `
-                    <span class="result-team-1 match-tier" style="--team-color: ${team1.color};">
-                `;
-
-                html += `<span class="acronym">${team1.acronym}</span>`;
-
-                if (match.forfeit === 1) html += `
-                    <span class="game-wins forfeit">F</span>
-                `;
-                else if (match.forfeit === 2) html += `
-                    <span class="game-wins"></span>
-                `;
-                else html += `
-                    <span class="game-wins">${match.team1GameWins}</span>
-                `;
-
-                html += `
-                    </span>
-                    <span class="result-separator">-</span>
-                `;
-
-                if (match.winnerID === team2.id) html += `
-                    <span class="result-team-2 match-winner" style="--team-color: ${team2.color};">
-                `;
-                else if (match.winnerID === team1.id) html += `
-                    <span class="result-team-2 match-loser" style="--team-color: ${team2.color};">
-                `;
-                else html += `
-                    <span class="result-team-2 match-tier" style="--team-color: ${team2.color};">
-                `;
-
-                if (match.forfeit === 2) html += `
-                    <span class="game-wins forfeit">F</span>
-                `;
-                else if (match.forfeit === 1) html += `
-                    <span class="game-wins"></span>
-                `;
-                else html += `
-                    <span class="game-wins">${match.team2GameWins}</span>
-                `;
-
-                html += `
-                        <span class="acronym">${team2.acronym}</span>
-                    </span>
-                `;
-            }
-            else html += `<span class="match-incomplete">TBD</span>`;
-
-            html += `
-                    </td>
+                    <td class="left-align match-result">${generateMatchResult(match, team1, team2)}</td>
                 </tr>
             `;
         }
@@ -223,14 +165,210 @@ function displayPlayoffs(league, season) {
     `;
 
     if (league.playoffsComplete()) {
-        //TODO: display podium
+        let numPodiums = league.playoffs.podiumSlots.length;
+
+        let placements = [];
+        for (let i = 0; i < numPodiums; i++) placements.push(
+            findPlayoffTeam(league, league.playoffs.podiumSlots[i])
+        );
+
+        let firstPlacePodium, secondPlacePodium, thirdPlacePodium;
+
+        if (numPodiums >= 1) {
+            firstPlacePodium = `
+                <article class="podium-card podium-card-first" style="--team-color: ${placements[0].color};">
+                    <span class="podium-medal" aria-label="First Place">🥇</span>
+                    <span class="podium-place">Champions</span>
+                    <a href="?season=${season}&page=team&id=${placements[0].id}">
+                        <h4 class="podium-team-name">${placements[0].name}</h4>
+                    </a>
+                    <div class="podium-players">
+            `;
+
+            for (const player of placements[0].players) firstPlacePodium += `<span>${player}</span>`;
+
+            firstPlacePodium += `
+                    </div>
+                </article>
+            `;
+        }
+
+        if (numPodiums >= 2) {
+            secondPlacePodium = `
+                <article class="podium-card podium-card-second" style="--team-color: ${placements[1].color};">
+                    <span class="podium-medal" aria-label="Second Place">🥈</span>
+                    <span class="podium-place">Runners Up</span>
+                    <a href="?season=${season}&page=team&id=${placements[1].id}">
+                        <h4 class="podium-team-name">${placements[1].name}</h4>
+                    </a>
+                </article>
+            `;
+        }
+
+        if (numPodiums >= 3) {
+            thirdPlacePodium = `
+                <article class="podium-card podium-card-third" style="--team-color: ${placements[2].color};">
+                    <span class="podium-medal" aria-label="Third Place">🥉</span>
+                    <span class="podium-place">3rd Place</span>
+                    <a href="?season=${season}&page=team&id=${placements[2].id}">
+                        <h4 class="podium-team-name">${placements[2].name}</h4>
+                    </a>
+                </article>
+            `;
+        }
+
+        let remainingPodiums = "";
+
+        for (let i = 3; i < numPodiums; i++) remainingPodiums += `
+            <article class="podium-other" style="--team-color: ${placements[i].color};">
+                <div class="podium-other-place">${i + 1}th</div>
+                <a href="?season=${season}&page=team&id=${placements[i].id}">
+                    <h4 class="podium-team-name">${placements[i].name}</h4>
+                </a>
+            </article>
+        `;
+
+        html += `
+            <section class="standings-podium">
+                <div class="podium-grid">
+        `;
+
+        if (numPodiums === 1) html += `
+            ${firstPlacePodium}
+        `;
+        else if (numPodiums === 2) html += `
+            ${firstPlacePodium}
+            ${secondPlacePodium}
+        `;
+        else html += `
+            ${secondPlacePodium}
+            ${firstPlacePodium}
+            ${thirdPlacePodium}
+        `;
+
+        html += `
+                </div>
+
+                ${remainingPodiums}
+            </section>
+        `;
     }
 
     if (league.regularSeasonComplete()) {
-        //TODO: bracket visuals [make sure to display forfeits properly]
+        for (let i = 0; i < league.playoffs.bracketNames.length; i++) {
+            let bracketName = league.playoffs.bracketNames[i];
+            if (bracketName === null) bracketName =
+                (league.playoffs.bracketNames.length > 1)
+                ?
+                `Bracket ${i + 1}`
+                :
+                "Bracket"
+            ;
+
+            html += `
+                <section class="playoff-bracket">
+                    <h3>${bracketName}:</h3>
+                    <div class="bracket-rounds">
+            `;
+            
+            for (let j = 0; j < league.playoffs.roundNames.length; j++) {
+                let roundName = league.playoffs.roundNames[j];
+                if (roundName === null && league.playoffs.roundNames.length > 1)
+                    roundName = `Round ${j + 1}`
+                ;
+
+                html += `<section class="bracket-round">`;
+
+                const roundMatchOrder = [];
+                for (const playoffMatchStructure of league.playoffs.matchStructure)
+                    if (
+                        playoffMatchStructure.bracketIndex === i
+                        &&
+                        playoffMatchStructure.roundIndex === j
+                    ) roundMatchOrder.push(playoffMatchStructure)
+                ;
+                roundMatchOrder.sort((a, b) => a.orderIndex - b.orderIndex);
+
+                if (roundName !== null && roundMatchOrder.length > 0)
+                    html += `<h4>${roundName}</h4>`
+                ;
+
+                for (const playoffMatchStructure of roundMatchOrder) {
+                    const match = league.getMatch(playoffMatchStructure.matchID);
+                    const team1 = findPlayoffTeam(league, playoffMatchStructure.teamSlots[0]);
+                    const team2 = findPlayoffTeam(league, playoffMatchStructure.teamSlots[1]);
+
+                    const team1NameAcronymRank =
+                        (team1 === null)
+                        ?
+                        "[TBD]"
+                        :
+                        `${team1.name} (${team1.acronym}) [ ${team1.rank} ]`
+                    ;
+                    const team2NameAcronymRank =
+                        (team2 === null)
+                        ?
+                        "[TBD]"
+                        :
+                        `${team2.name} (${team2.acronym}) [ ${team2.rank} ]`
+                    ;
+
+                    html += `
+                        <article class="playoff-match">
+                            <div class="matchup">
+                                <a href="?season=${season}&page=match&id=${match.id}">            
+                                    <div>${team1NameAcronymRank}</div>
+                                    <div>vs.</div>
+                                    <div>${team2NameAcronymRank}</div>
+                                </a>
+                            </div>
+                            <div class="match-result">${generateMatchResult(match, team1, team2)}</div>
+                        </article>
+                    `;
+                }
+
+                html += `
+                    </section>
+                `;
+            }
+
+            html += `
+                    </div>
+                </section>
+            `;
+        }
     }
 
     html += `
+        <section class="playoff-round-info">
+            <h3>Playoff Round Info:</h3>
+            <div class="round-info-grid">
+    `;
+
+    for (let j = 0; j < league.playoffs.roundNames.length; j++) {
+        let roundName = league.playoffs.roundNames[j];
+        if (roundName === null && league.playoffs.roundNames.length > 1)
+            roundName = `Round ${j + 1}`
+        ;
+
+        const dateTimeString = formatDateTime(new Date(league.playoffs.matchDates[j].date));
+        const locationString = league.playoffs.matchDates[j].location;
+
+        html += `<article class="round-info">`;
+        
+        if (roundName !== null) html += `<h4>${roundName}</h4>`;
+
+        html += `
+                <p>${dateTimeString}</p>
+                <p>${locationString}</p>
+            </article>
+        `;
+    }
+    
+    html += `
+            </div>
+        </section>
+
         <span class="playoff-rules">
             <h3>Playoff Rules:</h3>
     `;
@@ -239,7 +377,6 @@ function displayPlayoffs(league, season) {
 
     html += `
         </span>
-        <p>This page is still in development... stay tuned!</p>
     `;
 
     return html;
@@ -690,6 +827,69 @@ function printArrayAsList(arr) {
     return html;
 }
 
+function generateMatchResult(match, team1, team2) {
+    html = "";
+
+    if (match.cancel) html += `<span class="match-cancel">Cancelled</span>`;
+    else if (match.isComplete()) {
+        let team1Result = "tier";
+        let team2Result = "tier";
+        if (match.week === "Playoffs") {
+            team1Result = (match.winner === 1)? "winner": "loser";
+            team2Result = (match.winner === 2)? "winner": "loser";
+        }
+        else {
+            if (match.winnerID === team1.id) {
+                team1Result = "winner";
+                team2Result = "loser";
+            }
+            else if (match.winnerID === team2.id) {
+                team2Result = "winner";
+                team1Result = "loser";
+            }
+        }
+
+        html += `
+            <span class="result-team-1 match-${team1Result}" style="--team-color: ${team1.color};">
+                <span class="acronym">${team1.acronym}</span>
+        `;
+
+        if (match.forfeit === 1) html += `
+            <span class="game-wins forfeit">F</span>
+        `;
+        else if (match.forfeit === 2) html += `
+            <span class="game-wins"></span>
+        `;
+        else html += `
+            <span class="game-wins">${match.team1GameWins}</span>
+        `;
+
+        html += `
+            </span>
+            <span class="result-separator">-</span>
+            <span class="result-team-2 match-${team2Result}" style="--team-color: ${team2.color};">
+        `;
+
+        if (match.forfeit === 2) html += `
+            <span class="game-wins forfeit">F</span>
+        `;
+        else if (match.forfeit === 1) html += `
+            <span class="game-wins"></span>
+        `;
+        else html += `
+            <span class="game-wins">${match.team2GameWins}</span>
+        `;
+
+        html += `
+                <span class="acronym">${team2.acronym}</span>
+            </span>
+        `;
+    }
+    else html += `<span class="match-incomplete">TBD</span>`;
+
+    return html;
+}
+
 function findPlayoffTeam(league, teamSlot) {
     if (teamSlot.sourceType === "rankings") return league.teams[teamSlot.rank - 1];
     else if (teamSlot.sourceType === "match") {
@@ -839,3 +1039,7 @@ async function main() {
 }
 
 main();
+
+//TODO:
+//  1. figure out how to better differentiate playoff placement from regular season placement
+//  2. (maybe?) playoff chances
