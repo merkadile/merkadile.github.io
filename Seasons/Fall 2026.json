@@ -448,7 +448,26 @@
             "forfeit": null,
             "cancel": false,
             "games": [
-
+                {
+                    "team1Score": 0,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 0
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 5
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 8
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 14
+                }
             ]
         },
         {
@@ -459,7 +478,22 @@
             "forfeit": null,
             "cancel": false,
             "games": [
-                
+                {
+                    "team1Score": 21,
+                    "team2Score": 11
+                },
+                {
+                    "team1Score": 4,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 15
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 19
+                }
             ]
         },
         {
@@ -527,8 +561,10 @@
     "playoffs": {
         "rules": [
             "The top 2 ranked teams of the regular season qualify for the championship match, while the bottom 2 ranked teams play a 3rd-place match.",
-            "Playoff matches work the same as regular season matches, except that if there is a tie at the end of the allotted time period, one final game is played to determine the winner.",
-            "Alternates will be allowed to sub in if approved by commissioners ahead of time.",
+            "Playoff matches are 'best out of five' (in other words, the first team to win three games wins the match). Otherwise, playoff matches work the same as regular season matches.",
+            [
+                "However, alternates will only be allowed to sub in if approved by commissioners ahead of time."
+            ],
             "The champion team of this season will be awarded $500. The runners up will be awarded the remainder of the pot."
         ],
         "bracketNames": [

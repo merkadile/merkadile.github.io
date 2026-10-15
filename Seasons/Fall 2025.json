@@ -404,8 +404,10 @@
     "playoffs": {
         "rules": [
             "The top 2 ranked teams of the regular season qualify for the championship match.",
-            "This match will work the same as regular season matches, except that if there is a tie at the end of the allotted time period, one final game is played to determine the winner.",
-            "Alternates will not be allowed to sub in during playoff matches.",
+            "This match is 'best out of five' (in other words, the first team to win three games wins the match). Otherwise, it works the same as regular season matches.",
+            [
+                "However, alternates will not be allowed to sub in for this match."
+            ],
             "The champion team of this season will be awarded the entire pot of money collected throughout the season."
         ],
         "bracketNames": [
