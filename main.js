@@ -140,10 +140,19 @@ function displaySchedule(league, season, week) {
         if (match.week === week) {
             html += `
                 <tr>
-                    <td class="left-align"><a href="?season=${season}&page=match&id=${match.id}">
+                    <td class="left-align">
                         ${team1.name} (${team1.acronym}) vs. ${team2.name} (${team2.acronym})
-                    </a></td>
-                    <td class="left-align match-result">${generateMatchResult(match, team1, team2)}</td>
+                    </td>
+                    <td class="left-align">
+                        <div class="schedule-match-result-container">
+                            <span class="match-result">
+                                ${generateMatchResult(match, team1, team2)}
+                            </span>
+                            <span>
+                                (<a href="?season=${season}&page=match&id=${match.id}">details</a>)
+                            </span>
+                        </div>
+                    </td>
                 </tr>
             `;
         }
@@ -219,14 +228,23 @@ function displayPlayoffs(league, season) {
 
         let remainingPodiums = "";
 
-        for (let i = 3; i < numPodiums; i++) remainingPodiums += `
-            <article class="podium-other" style="--team-color: ${placements[i].color};">
-                <div class="podium-other-place">${i + 1}th</div>
-                <a href="?season=${season}&page=team&id=${placements[i].id}">
-                    <h4 class="podium-team-name">${placements[i].name}</h4>
-                </a>
-            </article>
-        `;
+        for (let i = 3; i < numPodiums; i++) {
+            let placement = i + 1;
+            let placeSuffix = "th";
+            if (placement % 10 === 1 && placement % 100 !== 11) placeSuffix = "st";
+            else if (placement % 10 === 2 && placement % 100 !== 12) placeSuffix = "nd";
+            else if (placement % 10 === 3 && placement % 100 !== 13) placeSuffix = "rd";
+            const placeString = `${placement}${placeSuffix}`;
+
+            remainingPodiums += `
+                <article class="podium-other" style="--team-color: ${placements[i].color};">
+                    <div class="podium-other-place">${placeString}</div>
+                    <a href="?season=${season}&page=team&id=${placements[i].id}">
+                        <h4 class="podium-team-name">${placements[i].name}</h4>
+                    </a>
+                </article>
+            `;
+        }
 
         html += `
             <section class="standings-podium">
@@ -315,14 +333,19 @@ function displayPlayoffs(league, season) {
 
                     html += `
                         <article class="playoff-match">
-                            <div class="matchup">
-                                <a href="?season=${season}&page=match&id=${match.id}">            
-                                    <div>${team1NameAcronymRank}</div>
-                                    <div>vs.</div>
-                                    <div>${team2NameAcronymRank}</div>
-                                </a>
+                            <div class="matchup">           
+                                <div>${team1NameAcronymRank}</div>
+                                <div>vs.</div>
+                                <div>${team2NameAcronymRank}</div>
                             </div>
-                            <div class="match-result">${generateMatchResult(match, team1, team2)}</div>
+                            <div class="playoff-match-result-container">
+                                <span class="match-result">
+                                    ${generateMatchResult(match, team1, team2)}
+                                </span>
+                                <span>
+                                    (<a href="?season=${season}&page=match&id=${match.id}">details</a>)
+                                </span>
+                            </div>
                         </article>
                     `;
                 }
@@ -439,7 +462,7 @@ function displayTeam(league, season, teamID) {
                 <div class="team-summary">
                     <span>${team.wins} - ${team.losses} - ${team.ties}</span>
                     <span>${ptsString}</span>
-                    <span>${rankString} Place</span>
+                    <span>${rankString} in Ranking</span>
                 </div>
             </div>
 
@@ -589,12 +612,20 @@ function displayMatch(league, season, matchID) {
     
     if (match.week === "Playoffs") {
         const playoffMatchStructure = league.getPlayoffMatchStructure(matchID);
-        const bracketName = league.playoffs.bracketNames[
+
+        let bracketName = league.playoffs.bracketNames[
             playoffMatchStructure.bracketIndex
         ];
-        const roundName = league.playoffs.roundNames[
+        if (bracketName === null && league.playoffs.bracketNames.length > 1)
+            bracketName = `Bracket ${playoffMatchStructure.bracketIndex + 1}`
+        ;
+
+        let roundName = league.playoffs.roundNames[
             playoffMatchStructure.roundIndex
         ];
+        if (roundName === null && league.playoffs.roundNames.length > 1)
+            roundName = `Round ${playoffMatchStructure.roundIndex + 1}`
+        ;
 
         team1 = findPlayoffTeam(league, playoffMatchStructure.teamSlots[0]);
         team2 = findPlayoffTeam(league, playoffMatchStructure.teamSlots[1]);
@@ -635,6 +666,8 @@ function displayMatch(league, season, matchID) {
     else {
         let team1Result = "tie";
         let team2Result = "tie";
+        let team1Seed = "";
+        let team2Seed = "";
         if (match.week === "Playoffs") {
             if (match.winner === 1) {
                 team1Result = "win";
@@ -644,6 +677,9 @@ function displayMatch(league, season, matchID) {
                 team1Result = "loss";
                 team2Result = "win";
             }
+
+            team1Seed = ` [ ${team1.rank} ]`;
+            team2Seed = ` [ ${team2.rank} ]`;
         }
         else {
             if (match.winnerID === match.team1ID) {
@@ -675,12 +711,12 @@ function displayMatch(league, season, matchID) {
                 <div class="match-team-headings">
                     <h3 class="match-team-1-heading match-${team1Result}-team">
                         <a href="?season=${season}&page=team&id=${team1.id}">
-                            ${team1.name} (${team1.acronym})
+                            ${team1.name} (${team1.acronym})${team1Seed}
                         </a>
                     </h3>
                     <h3 class="match-team-2-heading match-${team2Result}-team">
                         <a href="?season=${season}&page=team&id=${team2.id}">
-                            ${team2.name} (${team2.acronym})
+                            ${team2.name} (${team2.acronym})${team2Seed}
                         </a>
                     </h3>
                     <div class="match-team-1-result match-${team1Result}">match ${team1Result}
@@ -1040,6 +1076,5 @@ async function main() {
 
 main();
 
-//TODO:
-//  1. figure out how to better differentiate playoff placement from regular season placement
+//  1. program that makes json easier to manage
 //  2. (maybe?) playoff chances
