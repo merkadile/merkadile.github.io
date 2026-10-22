@@ -504,7 +504,22 @@
             "forfeit": null,
             "cancel": false,
             "games": [
-                
+                {
+                    "team1Score": 10,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 16
+                },
+                {
+                    "team1Score": 11,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 15
+                }
             ]
         },
         {
@@ -515,7 +530,18 @@
             "forfeit": null,
             "cancel": false,
             "games": [
-                
+                {
+                    "team1Score": 17,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 15,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 13,
+                    "team2Score": 21
+                }
             ]
         },
         {
