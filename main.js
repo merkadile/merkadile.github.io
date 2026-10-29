@@ -22,6 +22,9 @@ function displayStandings(league, season) {
             <tbody>
     `;
 
+    league.teams[0].rank = 9999;
+    league.teams.sort((a, b) => a.rank - b.rank);
+
     for (const team of league.teams) {
         const rankString = team.rankTie? `T-${team.rank}`: `${team.rank}`;
 
@@ -72,6 +75,8 @@ function displayStandings(league, season) {
     `;
 
     html += printArrayAsList(league.mainRules);
+
+    html += `<ul><li>Eliott is not allowed to win.</li></ul>`;
 
     html += `
         </span>
