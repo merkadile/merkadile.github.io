@@ -548,7 +548,28 @@
             "week": 9,
             "forfeit": null,
             "cancel": false,
-            "games": []
+            "games": [
+                {
+                    "team1Score": 7,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 1,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 2,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 21,
+                    "team2Score": 19
+                },
+                {
+                    "team1Score": 18,
+                    "team2Score": 21
+                }
+            ]
         },
         {
             "id": 18,
@@ -557,7 +578,20 @@
             "week": 9,
             "forfeit": null,
             "cancel": false,
-            "games": []
+            "games": [
+                {
+                    "team1Score": 14,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 12,
+                    "team2Score": 21
+                },
+                {
+                    "team1Score": 9,
+                    "team2Score": 21
+                }
+            ]
         },
         {
             "id": 19,
