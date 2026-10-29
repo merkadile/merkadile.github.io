@@ -844,8 +844,9 @@ function formatDateTime(date) {
 
     const timeString = date.toLocaleTimeString("en-US", {
         hour: "numeric",
-        minute: "2-digit"
-    }).toLowerCase();
+        minute: "2-digit",
+        timeZoneName: "short"
+    }).replace(/\b(AM|PM)\b/, match => match.toLowerCase());
 
     return `${dateWithSuffix} at ${timeString}`;
 }
