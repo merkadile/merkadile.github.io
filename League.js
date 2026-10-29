@@ -1,3 +1,21 @@
+"use strict";
+
+const TeamClass =
+    (typeof require === "function")
+    ?
+    require("./Team.js")
+    :
+    Team
+;
+
+const MatchClass =
+    (typeof require === "function")
+    ?
+    require("./Match.js")
+    :
+    Match
+;
+
 class League {
     constructor(data) {
         this.matchDates = data.matchDates;
@@ -11,14 +29,14 @@ class League {
         this.playoffStructureMap = new Map();
 
         for (const matchData of data.matches) {
-            const match = new Match(matchData);
+            const match = new MatchClass(matchData);
 
             this.matches.push(match);
             this.matchMap.set(match.id, match);
         }
 
         for (const teamData of data.teams) {
-            const team = new Team(teamData);
+            const team = new TeamClass(teamData);
 
             this.teams.push(team);
             this.teamMap.set(team.id, team);
@@ -312,4 +330,26 @@ class League {
 
         return !(incompleteMatchFound);
     }
+
+    findPlayoffTeam(teamSlot) {
+        if (teamSlot.sourceType === "rankings") return this.teams[teamSlot.rank - 1];
+        else if (teamSlot.sourceType === "match") {
+            const sourceMatch = this.getMatch(teamSlot.matchID);
+            const sourceMatchStructure = this.getPlayoffMatchStructure(teamSlot.matchID)
+
+            if (!(sourceMatch.isComplete())) return null;
+            else if (teamSlot.result === "winner") return this.findPlayoffTeam(
+                sourceMatchStructure.teamSlots[sourceMatch.winner - 1]
+            );
+            else if (teamSlot.result === "loser") return this.findPlayoffTeam(
+                sourceMatchStructure.teamSlots[2 - sourceMatch.winner]
+            );
+            else return null;
+        }
+        else return null;
+    }
+}
+
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = League;
 }

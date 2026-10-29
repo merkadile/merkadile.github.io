@@ -1,3 +1,5 @@
+"use strict";
+
 function displayStandings(league, season) {
     document.getElementById("standings-button").classList.add("active");
 
@@ -133,29 +135,27 @@ function displaySchedule(league, season, week) {
             <tbody>
     `;
 
-    for (const match of league.matches) {
+    for (const match of league.matches) if (match.week === week) {
         const team1 = league.getTeam(match.team1ID);
         const team2 = league.getTeam(match.team2ID);
 
-        if (match.week === week) {
-            html += `
-                <tr>
-                    <td class="left-align">
-                        ${team1.name} (${team1.acronym}) vs. ${team2.name} (${team2.acronym})
-                    </td>
-                    <td class="left-align">
-                        <div class="schedule-match-result-container">
-                            <span class="match-result">
-                                ${generateMatchResult(match, team1, team2)}
-                            </span>
-                            <span>
-                                (<a href="?season=${season}&page=match&id=${match.id}">details</a>)
-                            </span>
-                        </div>
-                    </td>
-                </tr>
-            `;
-        }
+        html += `
+            <tr>
+                <td class="left-align">
+                    ${team1.name} (${team1.acronym}) vs. ${team2.name} (${team2.acronym})
+                </td>
+                <td class="left-align">
+                    <div class="schedule-match-result-container">
+                        <span class="match-result">
+                            ${generateMatchResult(match, team1, team2)}
+                        </span>
+                        <span>
+                            (<a href="?season=${season}&page=match&id=${match.id}">details</a>)
+                        </span>
+                    </div>
+                </td>
+            </tr>
+        `;
     }
 
     html += `
@@ -169,7 +169,7 @@ function displaySchedule(league, season, week) {
 function displayPlayoffs(league, season) {
     document.getElementById("playoffs-button").classList.add("active");
     
-    html = `
+    let html = `
         <h2>Playoffs</h2>
     `;
 
@@ -178,7 +178,7 @@ function displayPlayoffs(league, season) {
 
         let placements = [];
         for (let i = 0; i < numPodiums; i++) placements.push(
-            findPlayoffTeam(league, league.playoffs.podiumSlots[i])
+            league.findPlayoffTeam(league.playoffs.podiumSlots[i])
         );
 
         let firstPlacePodium, secondPlacePodium, thirdPlacePodium;
@@ -313,8 +313,8 @@ function displayPlayoffs(league, season) {
 
                 for (const playoffMatchStructure of roundMatchOrder) {
                     const match = league.getMatch(playoffMatchStructure.matchID);
-                    const team1 = findPlayoffTeam(league, playoffMatchStructure.teamSlots[0]);
-                    const team2 = findPlayoffTeam(league, playoffMatchStructure.teamSlots[1]);
+                    const team1 = league.findPlayoffTeam(playoffMatchStructure.teamSlots[0]);
+                    const team2 = league.findPlayoffTeam(playoffMatchStructure.teamSlots[1]);
 
                     const team1NameAcronymRank =
                         (team1 === null)
@@ -608,7 +608,7 @@ function displayMatch(league, season, matchID) {
     const match = league.getMatch(matchID);
     let team1, team2;
 
-    let html = ``;
+    let html = "";
     
     if (match.week === "Playoffs") {
         const playoffMatchStructure = league.getPlayoffMatchStructure(matchID);
@@ -627,8 +627,8 @@ function displayMatch(league, season, matchID) {
             roundName = `Round ${playoffMatchStructure.roundIndex + 1}`
         ;
 
-        team1 = findPlayoffTeam(league, playoffMatchStructure.teamSlots[0]);
-        team2 = findPlayoffTeam(league, playoffMatchStructure.teamSlots[1]);
+        team1 = league.findPlayoffTeam(playoffMatchStructure.teamSlots[0]);
+        team2 = league.findPlayoffTeam(playoffMatchStructure.teamSlots[1]);
 
         const team1Name = (team1 === null)? "[TBD]": team1.name;
         const team2Name = (team2 === null)? "[TBD]": team2.name;
@@ -864,7 +864,7 @@ function printArrayAsList(arr) {
 }
 
 function generateMatchResult(match, team1, team2) {
-    html = "";
+    let html = "";
 
     if (match.cancel) html += `<span class="match-cancel">Cancelled</span>`;
     else if (match.isComplete()) {
@@ -924,24 +924,6 @@ function generateMatchResult(match, team1, team2) {
     else html += `<span class="match-incomplete">TBD</span>`;
 
     return html;
-}
-
-function findPlayoffTeam(league, teamSlot) {
-    if (teamSlot.sourceType === "rankings") return league.teams[teamSlot.rank - 1];
-    else if (teamSlot.sourceType === "match") {
-        const sourceMatch = league.getMatch(teamSlot.matchID);
-        const sourceMatchStructure = league.getPlayoffMatchStructure(teamSlot.matchID)
-
-        if (!(sourceMatch.isComplete())) return null;
-        else if (teamSlot.result === "winner") return findPlayoffTeam(
-            league, sourceMatchStructure.teamSlots[sourceMatch.winner - 1]
-        );
-        else if (teamSlot.result === "loser") return findPlayoffTeam(
-            league, sourceMatchStructure.teamSlots[2 - sourceMatch.winner]
-        );
-        else return null;
-    }
-    else return null;
 }
 
 async function main() {

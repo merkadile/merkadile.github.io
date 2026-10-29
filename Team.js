@@ -1,3 +1,5 @@
+"use strict";
+
 class Team {
     constructor(data) {
         this.id = data.id;
@@ -89,4 +91,8 @@ class Team {
     updateRankTie(rankTie) {
         this.rankTie = rankTie;
     }
+}
+
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = Team;
 }

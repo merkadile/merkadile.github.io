@@ -25,7 +25,6 @@
             "location": "Mark and Kathy's - 239 High Range Rd. Londonderry, NH"
         }
     ],
-
     "mainRules": [
         "Each match will last 60 minutes.",
         [
@@ -43,7 +42,6 @@
         "If a team is missing a player, they may acquire an alternate that is present to substitute. If every team is full and more alternates are present, they can play on one of the teams as approved by the commissioners.",
         "Each player pays $5 each week during the regular season. All money should be given to Commissioner Mark."
     ],
-
     "teams": [
         {
             "id": 1,
@@ -82,7 +80,6 @@
             ]
         }
     ],
-
     "matches": [
         {
             "id": 1,
@@ -400,7 +397,6 @@
             ]
         }
     ],
-
     "playoffs": {
         "rules": [
             "The top 2 ranked teams of the regular season qualify for the championship match.",
@@ -457,8 +453,5 @@
             }
         ]
     },
-
-    "tiebreakers": [
-        
-    ]
+    "tiebreakers": []
 }

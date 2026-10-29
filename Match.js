@@ -1,3 +1,13 @@
+"use strict";
+
+const GameClass =
+    (typeof require === "function")
+    ?
+    require("./Game.js")
+    :
+    Game
+;
+
 class Match {
     constructor(data) {
         this.id = data.id;
@@ -9,7 +19,7 @@ class Match {
 
         this.games = [];
         for (const gameData of data.games)
-            this.games.push(new Game(gameData))
+            this.games.push(new GameClass(gameData))
         ;
 
         this.calculateResults();
@@ -67,4 +77,8 @@ class Match {
             )
         );
     }
+}
+
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = Match;
 }
